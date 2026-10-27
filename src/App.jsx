@@ -7,7 +7,7 @@ import Projects from './pages/Projects.jsx';
 
 function App() {
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'var(--color-bg-primary)', color: 'var(--color-text-primary)' }}>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

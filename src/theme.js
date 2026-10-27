@@ -1,8 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
-// primary, secondary, error, success의 main은 MUI가 밝기 계산을 위해 직접 파싱하므로
-// var(--...) 대신 실제 hex를 써야 한다. 값은 index.css의 CSS 변수와 같게 유지한다.
-// 나머지(배경, 글자, 구분선)는 CSS 변수를 써서 다크모드가 자동 반영된다.
+// MUI는 palette 값을 내부에서 직접 파싱해 밝기를 계산하므로 var(--...)를 쓸 수 없고 hex만 가능하다.
+// 값은 index.css의 라이트모드 CSS 변수와 같게 유지한다.
+// 다크모드는 CssBaseline의 body 스타일과 각 컴포넌트 sx의 var(--...)로 처리한다.
 const theme = createTheme({
   palette: {
     primary: { main: '#000000', contrastText: '#ffffff' },
@@ -10,15 +10,15 @@ const theme = createTheme({
     error: { main: '#e43e39' },
     success: { main: '#68c74e' },
     background: {
-      default: 'var(--color-bg-primary)',
-      paper: 'var(--color-bg-secondary)',
+      default: '#ffffff',
+      paper: '#eeeeee',
     },
     text: {
-      primary: 'var(--color-text-primary)',
-      secondary: 'var(--color-text-secondary)',
-      disabled: 'var(--color-text-muted)',
+      primary: '#000000',
+      secondary: '#444444',
+      disabled: '#888888',
     },
-    divider: 'var(--color-border)',
+    divider: '#c6c6c6',
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -28,6 +28,16 @@ const theme = createTheme({
     },
   },
   spacing: 8,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: 'var(--color-bg-primary)',
+          color: 'var(--color-text-primary)',
+        },
+      },
+    },
+  },
 });
 
 export default theme;

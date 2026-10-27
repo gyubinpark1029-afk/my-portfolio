@@ -7,10 +7,10 @@ function SectionCard({ title, description, bgColor = 'var(--color-bg-secondary)'
       elevation={0}
       sx={{
         bgcolor: bgColor,
-        color: isPastel ? '#000000' : 'text.primary',
+        color: isPastel ? '#000000' : 'var(--color-text-primary)',
         textAlign: 'center',
         border: 1,
-        borderColor: 'divider',
+        borderColor: 'var(--color-border)',
       }}
     >
       <CardContent sx={{ py: { xs: 5, md: 8 }, px: 3 }}>

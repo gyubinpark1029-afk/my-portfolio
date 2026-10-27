@@ -13,7 +13,7 @@ function NavBar() {
       position="sticky"
       color="inherit"
       elevation={0}
-      sx={{ bgcolor: 'background.default', borderBottom: 1, borderColor: 'divider' }}
+      sx={{ bgcolor: 'var(--color-bg-primary)', borderBottom: 1, borderColor: 'var(--color-border)' }}
     >
       <Container maxWidth="md">
         <Toolbar disableGutters sx={{ justifyContent: 'center' }}>
