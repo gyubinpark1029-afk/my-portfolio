@@ -1,12 +1,14 @@
 import { createTheme } from '@mui/material/styles';
 
-// 색상 값은 index.css의 CSS 변수를 참조한다. (다크모드는 변수만 바뀌면 자동 반영)
+// primary, secondary, error, success의 main은 MUI가 밝기 계산을 위해 직접 파싱하므로
+// var(--...) 대신 실제 hex를 써야 한다. 값은 index.css의 CSS 변수와 같게 유지한다.
+// 나머지(배경, 글자, 구분선)는 CSS 변수를 써서 다크모드가 자동 반영된다.
 const theme = createTheme({
   palette: {
-    primary: { main: 'var(--color-button-primary)', contrastText: 'var(--color-bg-primary)' },
-    secondary: { main: 'var(--color-secondary)', contrastText: '#000000' },
-    error: { main: 'var(--color-error)' },
-    success: { main: 'var(--color-success)' },
+    primary: { main: '#000000', contrastText: '#ffffff' },
+    secondary: { main: '#98c5d3', contrastText: '#000000' },
+    error: { main: '#e43e39' },
+    success: { main: '#68c74e' },
     background: {
       default: 'var(--color-bg-primary)',
       paper: 'var(--color-bg-secondary)',
