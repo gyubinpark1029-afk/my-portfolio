@@ -7,6 +7,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import App from './App.jsx';
 import theme from './theme.js';
+import { AuthProvider } from './contexts/AuthContext.jsx';
 import './index.css';
 
 // HashRouter: GitHub Pages는 새로고침 시 서버 라우팅이 없어 주소에 #을 붙이는 방식이 안전하다.
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <HashRouter>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </HashRouter>
     </ThemeProvider>
   </React.StrictMode>,

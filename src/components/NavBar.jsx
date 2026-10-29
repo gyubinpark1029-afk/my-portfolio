@@ -1,7 +1,11 @@
-import { NavLink } from 'react-router-dom';
+import { Link as RouterLink, NavLink, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Container, Button, IconButton, Stack, useColorScheme } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import supabase from '../supabaseClient.js';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 const NAV_ITEMS = [
   { label: 'Home', path: '/' },
@@ -10,16 +14,24 @@ const NAV_ITEMS = [
 ];
 
 function NavBar() {
+  const { session } = useAuth();
+  const navigate = useNavigate();
   const { mode, systemMode, setMode } = useColorScheme();
   // 모드가 'system'이면 컴퓨터 설정에 따라 실제로 보이는 모드를 계산한다.
   const isDarkMode = (mode === 'system' ? systemMode : mode) === 'dark';
 
   const handleToggleMode = () => setMode(isDarkMode ? 'light' : 'dark');
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+  };
+
   return (
     <AppBar position="sticky" color="primary" elevation={0}>
       <Container maxWidth="md">
-        <Toolbar disableGutters sx={{ position: 'relative', justifyContent: 'center' }}>
+        {/* 좁은 화면에서는 오른쪽 아이콘과 겹치지 않도록 메뉴를 왼쪽에 붙인다. */}
+        <Toolbar disableGutters sx={{ position: 'relative', justifyContent: { xs: 'flex-start', sm: 'center' } }}>
           <Stack direction="row" spacing={1}>
             {NAV_ITEMS.map((item) => (
               <Button
@@ -36,14 +48,24 @@ function NavBar() {
               </Button>
             ))}
           </Stack>
-          <IconButton
-            color="inherit"
-            onClick={handleToggleMode}
-            aria-label={isDarkMode ? '라이트 모드로 바꾸기' : '다크 모드로 바꾸기'}
-            sx={{ position: 'absolute', right: 0 }}
-          >
-            {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
+          <Stack direction="row" sx={{ position: 'absolute', right: 0 }}>
+            {session ? (
+              <IconButton color="inherit" onClick={handleLogout} aria-label="로그아웃" title="로그아웃">
+                <LogoutIcon />
+              </IconButton>
+            ) : (
+              <IconButton color="inherit" component={RouterLink} to="/login" aria-label="로그인" title="로그인">
+                <LoginIcon />
+              </IconButton>
+            )}
+            <IconButton
+              color="inherit"
+              onClick={handleToggleMode}
+              aria-label={isDarkMode ? '라이트 모드로 바꾸기' : '다크 모드로 바꾸기'}
+            >
+              {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>

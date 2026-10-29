@@ -28,6 +28,10 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          # 공개용(publishable) 키라서 코드에 있어도 안전하다. 실제 보호는 DB의 RLS 정책이 담당한다.
+          VITE_SUPABASE_URL: https://jvjzvwkppcmlkogscjdv.supabase.co
+          VITE_SUPABASE_KEY: sb_publishable_eVU9K6GyPj4NQYRhry8puA_S7esLTFV
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
