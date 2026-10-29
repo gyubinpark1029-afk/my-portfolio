@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import supabase from '../supabaseClient.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import DrawerLogo from './DrawerLogo.jsx';
 
 const NAV_ITEMS = [
   { label: 'Home', path: '/' },
@@ -32,6 +33,15 @@ function NavBar() {
       <Container maxWidth="md">
         {/* 좁은 화면에서는 오른쪽 아이콘과 겹치지 않도록 메뉴를 왼쪽에 붙인다. */}
         <Toolbar disableGutters sx={{ position: 'relative', justifyContent: { xs: 'flex-start', sm: 'center' } }}>
+          {/* 좁은 화면에서는 메뉴와 아이콘만으로 자리가 꽉 차서 로고를 숨긴다. */}
+          <IconButton
+            component={RouterLink}
+            to="/"
+            aria-label="홈으로 가기"
+            sx={{ position: 'absolute', left: 0, display: { xs: 'none', sm: 'inline-flex' } }}
+          >
+            <DrawerLogo size={40} />
+          </IconButton>
           <Stack direction="row" spacing={1}>
             {NAV_ITEMS.map((item) => (
               <Button
