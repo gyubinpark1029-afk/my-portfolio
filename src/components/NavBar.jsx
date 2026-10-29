@@ -28,6 +28,10 @@ function NavBar() {
     navigate('/');
   };
 
+  // 로그인 상태면 로그아웃 동작을, 아니면 로그인 화면으로 가는 링크를 쓴다.
+  const authLabel = session ? '로그아웃' : '로그인';
+  const authProps = session ? { onClick: handleLogout } : { component: RouterLink, to: '/login' };
+
   return (
     <AppBar position="sticky" color="primary" elevation={0}>
       <Container maxWidth="md">
@@ -64,15 +68,19 @@ function NavBar() {
             ))}
           </Stack>
           <Stack direction="row" sx={{ position: 'absolute', right: 0 }}>
-            {session ? (
-              <IconButton color="inherit" onClick={handleLogout} aria-label="로그아웃" title="로그아웃">
-                <LogoutIcon />
-              </IconButton>
-            ) : (
-              <IconButton color="inherit" component={RouterLink} to="/login" aria-label="로그인" title="로그인">
-                <LoginIcon />
-              </IconButton>
-            )}
+            {/* 좁은 화면에서는 글자 대신 아이콘을 보여 가운데 메뉴와 겹치지 않게 한다. */}
+            <IconButton
+              color="inherit"
+              {...authProps}
+              aria-label={authLabel}
+              title={authLabel}
+              sx={{ display: { xs: 'inline-flex', sm: 'none' } }}
+            >
+              {session ? <LogoutIcon /> : <LoginIcon />}
+            </IconButton>
+            <Button color="inherit" {...authProps} sx={{ display: { xs: 'none', sm: 'inline-flex' } }}>
+              {authLabel}
+            </Button>
             <IconButton
               color="inherit"
               onClick={handleToggleMode}
