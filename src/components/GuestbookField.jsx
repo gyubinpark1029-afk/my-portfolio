@@ -8,7 +8,7 @@ const shake = keyframes`
   75% { transform: translateX(4px); }
 `;
 
-// 글자가 있으면 테마의 핑크(primary)로 채우고, 입력할 때마다 살짝 흔든다.
+// 입력할 때마다 살짝 흔든다.
 // icon에는 입력칸 앞에 보일 MUI 아이콘 컴포넌트를 넘긴다.
 function GuestbookField({ value, onChange, icon: Icon, slotProps, ...props }) {
   const [isShaking, setIsShaking] = useState(false);
@@ -33,7 +33,7 @@ function GuestbookField({ value, onChange, icon: Icon, slotProps, ...props }) {
         ...slotProps,
         input: Icon && {
           startAdornment: (
-            <InputAdornment position="start" sx={{ color: 'inherit', alignSelf: props.multiline ? 'flex-start' : 'center', mt: props.multiline ? 1 : 0 }}>
+            <InputAdornment position="start" sx={{ alignSelf: props.multiline ? 'flex-start' : 'center', mt: props.multiline ? 1 : 0 }}>
               <Icon />
             </InputAdornment>
           ),
@@ -41,11 +41,6 @@ function GuestbookField({ value, onChange, icon: Icon, slotProps, ...props }) {
       }}
       sx={{
         animation: isShaking ? `${shake} 0.25s` : 'none',
-        '& .MuiOutlinedInput-root': {
-          transition: 'background-color 0.2s',
-          bgcolor: value ? 'primary.main' : 'transparent',
-          color: value ? 'primary.contrastText' : 'inherit',
-        },
         // 움직임을 줄이도록 설정한 사용자에게는 흔들림을 끈다.
         '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
       }}
