@@ -41,6 +41,13 @@ function GuestbookField({ value, onChange, icon: Icon, slotProps, ...props }) {
       }}
       sx={{
         animation: isShaking ? `${shake} 0.25s` : 'none',
+        // 내용이 있으면 마우스를 올려도 핑크 테두리를 유지한다.
+        ...(value && {
+          '& .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'primary.main',
+            borderWidth: 2,
+          },
+        }),
         // 움직임을 줄이도록 설정한 사용자에게는 흔들림을 끈다.
         '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
       }}
