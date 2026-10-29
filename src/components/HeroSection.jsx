@@ -1,12 +1,17 @@
+import { Link as RouterLink } from 'react-router-dom';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { COMMUNITY_URL } from '../constants/links.js';
 import DrawerLogo from './DrawerLogo.jsx';
 
-// 서랍장 사이트의 히어로를 그대로 가져왔다. 버튼은 서랍장 사이트로 연결된다.
+// 서랍장 사이트의 히어로를 가져왔다. 가입 버튼은 포트폴리오 안으로, 나머지 버튼은 서랍장 사이트로 연결된다.
 function HeroSection() {
   const { session } = useAuth();
+  // 로그인 전에는 포트폴리오 회원가입으로, 로그인 후에는 서랍장 글쓰기로 연결한다.
+  const startButtonProps = session
+    ? { href: `${COMMUNITY_URL}#/posts/new`, target: '_blank', rel: 'noopener noreferrer' }
+    : { component: RouterLink, to: '/signup' };
 
   return (
     <Box
@@ -55,9 +60,7 @@ function HeroSection() {
             color="inherit"
             size="large"
             startIcon={<CreateIcon />}
-            href={`${COMMUNITY_URL}#${session ? '/posts/new' : '/signup'}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...startButtonProps}
             sx={{
               bgcolor: 'background.paper',
               color: 'text.primary',
