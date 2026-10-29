@@ -43,7 +43,7 @@ function NavBar() {
           >
             <DrawerLogo size={40} />
             {/* 이름은 메뉴와 겹치지 않는 넓은 화면에서만 보인다. */}
-            <Typography variant="h6" component="span" sx={{ display: { xs: 'none', md: 'inline' }, fontWeight: 500 }}>
+            <Typography variant="h6" component="span" sx={{ display: { xs: 'none', md: 'inline' }, fontWeight: 700 }}>
               서랍장
             </Typography>
           </Button>
