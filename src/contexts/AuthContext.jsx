@@ -19,17 +19,17 @@ export function AuthProvider({ children }) {
     return () => data.subscription.unsubscribe();
   }, []);
 
-  // 로그인한 사람의 users 테이블 정보(번호, 이름)를 가져온다.
+  // 로그인한 사람의 portfolio_users 테이블 정보(번호, 이름)를 가져온다. 서랍장에서만 가입한 사람은 없을 수 있다.
   useEffect(() => {
     if (!session) {
       setProfile(null);
       return;
     }
     supabase
-      .from('users')
+      .from('portfolio_users')
       .select('id, name')
       .eq('auth_id', session.user.id)
-      .single()
+      .maybeSingle()
       .then(({ data }) => setProfile(data));
   }, [session]);
 
