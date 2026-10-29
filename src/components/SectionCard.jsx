@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from '@mui/material';
 
 // bgColor에는 index.css의 CSS 변수를 문자열로 넘긴다. 파스텔 배경 위 글자는 다크모드에서도 검정을 유지한다.
-function SectionCard({ title, description, bgColor = 'var(--color-bg-secondary)', isPastel = false }) {
+function SectionCard({ title, description, bgColor = 'var(--color-bg-secondary)', isPastel = false, children }) {
   return (
     <Card
       elevation={0}
@@ -18,6 +18,7 @@ function SectionCard({ title, description, bgColor = 'var(--color-bg-secondary)'
           {title}
         </Typography>
         <Typography>{description}</Typography>
+        {children}
       </CardContent>
     </Card>
   );
