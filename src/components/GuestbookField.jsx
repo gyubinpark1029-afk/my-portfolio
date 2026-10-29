@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { keyframes } from '@emotion/react';
-import { TextField } from '@mui/material';
+import { InputAdornment, TextField } from '@mui/material';
 
 const shake = keyframes`
   0%, 100% { transform: translateX(0); }
@@ -9,7 +9,8 @@ const shake = keyframes`
 `;
 
 // 글자가 있으면 테마의 핑크(primary)로 채우고, 입력할 때마다 살짝 흔든다.
-function GuestbookField({ value, onChange, ...props }) {
+// icon에는 입력칸 앞에 보일 MUI 아이콘 컴포넌트를 넘긴다.
+function GuestbookField({ value, onChange, icon: Icon, slotProps, ...props }) {
   const [isShaking, setIsShaking] = useState(false);
 
   const handleChange = (event) => {
@@ -28,6 +29,16 @@ function GuestbookField({ value, onChange, ...props }) {
       value={value}
       onChange={handleChange}
       onAnimationEnd={handleAnimationEnd}
+      slotProps={{
+        ...slotProps,
+        input: Icon && {
+          startAdornment: (
+            <InputAdornment position="start" sx={{ color: 'inherit', alignSelf: props.multiline ? 'flex-start' : 'center', mt: props.multiline ? 1 : 0 }}>
+              <Icon />
+            </InputAdornment>
+          ),
+        },
+      }}
       sx={{
         animation: isShaking ? `${shake} 0.25s` : 'none',
         '& .MuiOutlinedInput-root': {
