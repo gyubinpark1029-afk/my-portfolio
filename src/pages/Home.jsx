@@ -1,6 +1,7 @@
 import PageContainer from '../components/PageContainer.jsx';
 import SectionCard from '../components/SectionCard.jsx';
 import ContactInfo from '../components/ContactInfo.jsx';
+import Guestbook from '../components/Guestbook.jsx';
 import HeroSection from '../components/HeroSection.jsx';
 
 const SECTIONS = [
@@ -21,7 +22,12 @@ const SECTIONS = [
     title: 'Contact',
     description: '궁금한 점이 있다면 편하게 연락 주세요. 반갑게 답장할게요!',
     color: 'warning',
-    children: <ContactInfo />,
+    children: (
+      <>
+        <ContactInfo />
+        <Guestbook />
+      </>
+    ),
   },
 ];
 
