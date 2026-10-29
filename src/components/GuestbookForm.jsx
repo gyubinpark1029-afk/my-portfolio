@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Alert, Box, Button, Rating, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Alert, Box, Button, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import supabase from '../supabaseClient.js';
+import GuestbookField from './GuestbookField.jsx';
 
 const EMOJIS = ['😊', '😍', '🥰', '👍', '🎉', '🔥'];
 const EMPTY_FORM = { name: '', message: '', email: '', phone: '', emoji: EMOJIS[0], rating: null };
@@ -44,8 +45,8 @@ function GuestbookForm({ onSubmitted }) {
       sx={{ p: 3, borderRadius: 1, bgcolor: 'background.paper', color: 'text.primary', textAlign: 'left' }}
     >
       <Typography variant="h6" component="h3">방명록 남기기 ✍️</Typography>
-      <TextField label="이름" required value={form.name} onChange={handleChange('name')} slotProps={{ htmlInput: { maxLength: 20 } }} />
-      <TextField
+      <GuestbookField label="이름" required value={form.name} onChange={handleChange('name')} slotProps={{ htmlInput: { maxLength: 20 } }} />
+      <GuestbookField
         label="내용"
         required
         multiline
@@ -55,8 +56,8 @@ function GuestbookForm({ onSubmitted }) {
         slotProps={{ htmlInput: { maxLength: 500 } }}
       />
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
-        <TextField label="이메일 (선택, 비공개)" type="email" value={form.email} onChange={handleChange('email')} slotProps={{ htmlInput: { maxLength: 100 } }} />
-        <TextField label="전화번호 (선택, 비공개)" type="tel" value={form.phone} onChange={handleChange('phone')} slotProps={{ htmlInput: { maxLength: 20 } }} />
+        <GuestbookField label="이메일 (선택, 비공개)" type="email" value={form.email} onChange={handleChange('email')} slotProps={{ htmlInput: { maxLength: 100 } }} />
+        <GuestbookField label="전화번호 (선택, 비공개)" type="tel" value={form.phone} onChange={handleChange('phone')} slotProps={{ htmlInput: { maxLength: 20 } }} />
       </Box>
       <Stack direction="row" spacing={2} useFlexGap sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
         <ToggleButtonGroup
