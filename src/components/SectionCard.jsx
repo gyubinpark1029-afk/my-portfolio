@@ -1,17 +1,25 @@
 import { Card, CardContent, Typography } from '@mui/material';
 
-// bgColor에는 index.css의 CSS 변수를 문자열로 넘긴다. 파스텔 배경 위 글자는 다크모드에서도 검정을 유지한다.
-function SectionCard({ title, description, bgColor = 'var(--color-bg-secondary)', isPastel = false, children }) {
+// color에는 테마 색 이름('primary', 'secondary', 'warning', 'success')이나 'gradient'를 넘긴다.
+// 비워 두면 흰색(paper) 카드가 된다. 글자색은 테마의 contrastText를 따라 다크 모드에서도 잘 보인다.
+function SectionCard({ title, description, color, children }) {
+  const isColored = Boolean(color);
+  const isGradient = color === 'gradient';
+
   return (
     <Card
-      elevation={0}
-      sx={{
-        bgcolor: bgColor,
-        color: isPastel ? '#000000' : 'var(--color-text-primary)',
-        textAlign: 'center',
-        border: 1,
-        borderColor: 'var(--color-border)',
-      }}
+      sx={[
+        {
+          textAlign: 'center',
+          color: isColored ? `${isGradient ? 'primary' : color}.contrastText` : 'text.primary',
+        },
+        isColored && !isGradient && { bgcolor: `${color}.main` },
+        // 분홍 → 노랑 → 하늘 → 민트로 번지는 몽환적인 배경 (서랍장 히어로와 같은 방식)
+        isGradient && {
+          background: (theme) =>
+            `linear-gradient(135deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 35%, ${theme.vars.palette.secondary.main} 70%, ${theme.vars.palette.success.main} 100%)`,
+        },
+      ]}
     >
       <CardContent sx={{ py: { xs: 5, md: 8 }, px: 3 }}>
         <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 500 }}>

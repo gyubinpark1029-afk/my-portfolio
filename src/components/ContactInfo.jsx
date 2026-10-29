@@ -10,9 +10,9 @@ const CONTACT_ITEMS = [
 
 const SNS_LINKS = [{ label: 'GitHub', href: 'https://github.com/gyubinpark1029-afk', Icon: GitHubIcon }];
 
-// 파스텔 노랑에 포인트 색(빨강)을 조금 섞어 따뜻한 주황을 만든다. 팔레트 변수만 사용한다.
-const WARM_ORANGE = 'color-mix(in srgb, var(--color-pastel-yellow) 70%, var(--color-accent) 30%)';
-const CREAM = 'color-mix(in srgb, var(--color-pastel-yellow) 25%, white)';
+// 테마의 노랑에 빨강(error)을 조금 섞어 따뜻한 주황을 만든다. 테마 변수만 사용한다.
+const WARM_ORANGE = 'color-mix(in srgb, var(--mui-palette-warning-main) 70%, var(--mui-palette-error-main) 30%)';
+const CREAM = 'color-mix(in srgb, var(--mui-palette-warning-main) 25%, white)';
 
 function ContactInfo() {
   return (
@@ -25,7 +25,7 @@ function ContactInfo() {
         textAlign: 'left',
       }}
     >
-      <Stack spacing={2} sx={{ p: 3, borderRadius: 4, bgcolor: CREAM }}>
+      <Stack spacing={2} sx={{ p: 3, borderRadius: 1, bgcolor: CREAM }}>
         {CONTACT_ITEMS.map(({ key, label, value, href, Icon }) => (
           <Stack key={key} direction="row" spacing={2} sx={{ alignItems: 'center' }}>
             <Box

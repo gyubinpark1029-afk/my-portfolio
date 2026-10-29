@@ -6,8 +6,7 @@ const SECTIONS = [
   {
     title: 'Hero',
     description: '여기는 Hero 섹션입니다. 메인 비주얼, 이름, 간단 소개가 들어갈 예정입니다.',
-    bgColor: 'var(--color-pastel-blue)',
-    isPastel: true,
+    color: 'gradient',
   },
   {
     title: 'About Me',
@@ -16,8 +15,7 @@ const SECTIONS = [
   {
     title: 'Skill Tree',
     description: '여기는 Skill Tree 섹션입니다. 기술 스택을 트리나 프로그레스바로 시각화할 예정입니다.',
-    bgColor: 'var(--color-pastel-pink)',
-    isPastel: true,
+    color: 'primary',
   },
   {
     title: 'Projects',
@@ -26,8 +24,7 @@ const SECTIONS = [
   {
     title: 'Contact',
     description: '궁금한 점이 있다면 편하게 연락 주세요. 반갑게 답장할게요!',
-    bgColor: 'var(--color-pastel-yellow)',
-    isPastel: true,
+    color: 'warning',
     children: <ContactInfo />,
   },
 ];
