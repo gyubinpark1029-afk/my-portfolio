@@ -5,9 +5,9 @@ function formatDate(isoString) {
 }
 
 function GuestbookList({ entries, isLoading, hasError }) {
-  if (isLoading) return <Typography>불러오는 중...</Typography>;
-  if (hasError) return <Typography>방명록을 불러오지 못했어요.</Typography>;
-  if (entries.length === 0) return <Typography>첫 번째 방명록을 남겨 주세요! 🧡</Typography>;
+  if (isLoading) return <Typography sx={{ textAlign: 'left' }}>불러오는 중...</Typography>;
+  if (hasError) return <Typography sx={{ textAlign: 'left' }}>방명록을 불러오지 못했어요.</Typography>;
+  if (entries.length === 0) return <Typography sx={{ textAlign: 'left' }}>첫 번째 방명록을 남겨 주세요! 🧡</Typography>;
 
   return (
     <Stack spacing={2}>
