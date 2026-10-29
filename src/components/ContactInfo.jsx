@@ -51,7 +51,10 @@ function ContactInfo() {
           </Stack>
         ))}
       </Stack>
-      <Stack spacing={2} sx={{ alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+      <Stack
+        spacing={2}
+        sx={{ p: 3, borderRadius: 1, bgcolor: CREAM, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
+      >
         <Typography>SNS에서도 편하게 만나요 🧡</Typography>
         <Stack direction="row" spacing={1.5} useFlexGap sx={{ justifyContent: 'center', flexWrap: 'wrap' }}>
           {SNS_LINKS.map(({ label, href, Icon }) => (
