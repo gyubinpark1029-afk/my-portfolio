@@ -29,7 +29,7 @@ function NavBar() {
             aria-label="홈으로 가기"
             sx={{ position: 'absolute', left: 0, display: { xs: 'none', sm: 'inline-flex' } }}
           >
-            <Typography variant="h6" component="span" sx={{ fontWeight: 700, textTransform: 'none' }}>
+            <Typography variant="h6" component="span" sx={{ fontSize: '1.0625rem', fontWeight: 700, textTransform: 'none' }}>
               MY portfolio
             </Typography>
           </Button>
