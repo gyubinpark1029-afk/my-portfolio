@@ -1,11 +1,7 @@
-import { Link as RouterLink, NavLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { AppBar, Toolbar, Container, Button, IconButton, Stack, Typography, useColorScheme } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
-import supabase from '../supabaseClient.js';
-import { useAuth } from '../contexts/AuthContext.jsx';
 import DrawerLogo from './DrawerLogo.jsx';
 
 const NAV_ITEMS = [
@@ -15,22 +11,11 @@ const NAV_ITEMS = [
 ];
 
 function NavBar() {
-  const { session } = useAuth();
-  const navigate = useNavigate();
   const { mode, systemMode, setMode } = useColorScheme();
   // 모드가 'system'이면 컴퓨터 설정에 따라 실제로 보이는 모드를 계산한다.
   const isDarkMode = (mode === 'system' ? systemMode : mode) === 'dark';
 
   const handleToggleMode = () => setMode(isDarkMode ? 'light' : 'dark');
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/');
-  };
-
-  // 로그인 상태면 로그아웃 동작을, 아니면 로그인 화면으로 가는 링크를 쓴다.
-  const authLabel = session ? '로그아웃' : '로그인';
-  const authProps = session ? { onClick: handleLogout } : { component: RouterLink, to: '/login' };
 
   return (
     <AppBar position="sticky" color="primary" elevation={0}>
@@ -68,19 +53,6 @@ function NavBar() {
             ))}
           </Stack>
           <Stack direction="row" sx={{ position: 'absolute', right: 0 }}>
-            {/* 좁은 화면에서는 글자 대신 아이콘을 보여 가운데 메뉴와 겹치지 않게 한다. */}
-            <IconButton
-              color="inherit"
-              {...authProps}
-              aria-label={authLabel}
-              title={authLabel}
-              sx={{ display: { xs: 'inline-flex', sm: 'none' } }}
-            >
-              {session ? <LogoutIcon /> : <LoginIcon />}
-            </IconButton>
-            <Button color="inherit" {...authProps} sx={{ display: { xs: 'none', sm: 'inline-flex' } }}>
-              {authLabel}
-            </Button>
             <IconButton
               color="inherit"
               onClick={handleToggleMode}
