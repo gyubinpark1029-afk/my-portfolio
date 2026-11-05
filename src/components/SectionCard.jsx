@@ -7,6 +7,8 @@ function SectionCard({ title, description, color, children }) {
     <Card
       sx={{
         textAlign: 'center',
+        // 확대된 카드가 섹션 밖으로 나와도 잘리지 않게 한다.
+        overflow: 'visible',
         bgcolor: color ? `${color}.main` : 'background.paper',
         color: color ? `${color}.contrastText` : 'text.primary',
       }}

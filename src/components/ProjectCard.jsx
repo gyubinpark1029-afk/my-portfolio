@@ -27,11 +27,12 @@ function ProjectCard({ project, onOpenDetails }) {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        position: 'relative',
         transition: 'transform 0.2s',
         // 터치 화면에서는 누르는 순간 살짝 눌리는 피드백을 준다.
         '&:active': { transform: 'scale(0.98)' },
-        // 마우스가 있는 기기에서만 썸네일을 확대한다.
-        '@media (hover: hover)': { '&:hover img.thumb': { transform: 'scale(1.2)' } },
+        // 마우스가 있는 기기에서만 카드 전체를 확대한다. zIndex는 옆 카드 위로 올라오게 한다.
+        '@media (hover: hover)': { '&:hover': { transform: 'scale(1.2)', zIndex: 1 } },
       }}
     >
       <Box sx={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: 'divider' }}>
@@ -40,7 +41,6 @@ function ProjectCard({ project, onOpenDetails }) {
         )}
         <Box
           component="img"
-          className="thumb"
           src={project.thumbnail_url}
           alt={`${project.title} 스크린샷`}
           loading="lazy"
@@ -51,7 +51,6 @@ function ProjectCard({ project, onOpenDetails }) {
             objectFit: 'cover',
             objectPosition: 'top',
             display: 'block',
-            transition: 'transform 0.2s',
             opacity: isImageLoaded ? 1 : 0,
           }}
         />
