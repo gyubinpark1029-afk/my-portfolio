@@ -28,11 +28,14 @@ function ProjectCard({ project, onOpenDetails }) {
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        transition: 'transform 0.2s',
+        transition: 'transform 0.2s, box-shadow 0.2s',
         // 터치 화면에서는 누르는 순간 살짝 눌리는 피드백을 준다.
         '&:active': { transform: 'scale(0.98)' },
         // 마우스가 있는 기기에서만 카드 전체를 확대한다. zIndex는 옆 카드 위로 올라오게 한다.
-        '@media (hover: hover)': { '&:hover': { transform: 'scale(1.02)', zIndex: 1 } },
+        // 확대와 함께 그림자도 더 진하고 넓게 만들어 떠오르는 느낌을 준다.
+        '@media (hover: hover)': {
+          '&:hover': { transform: 'scale(1.02)', zIndex: 1, boxShadow: '0 16px 40px rgba(0, 0, 0, 0.28)' },
+        },
       }}
     >
       <Box sx={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: 'divider' }}>
