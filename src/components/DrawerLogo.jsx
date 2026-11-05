@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 // 색은 테마 CSS 변수를 써서 라이트/다크 모드에 맞게 바뀐다.
 const INK = 'var(--mui-palette-text-primary)';
 const PAPER = 'var(--mui-palette-background-paper)';
-const BOOK_PINK = 'var(--mui-palette-primary-main)';
+const BOOK_PINK = 'var(--mui-palette-info-main)';
 const BOOK_SKY = 'var(--mui-palette-secondary-main)';
 const BOOK_MINT = 'var(--mui-palette-success-main)';
 

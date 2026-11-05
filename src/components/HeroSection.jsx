@@ -11,13 +11,14 @@ function HeroSection() {
         borderRadius: 4,
         textAlign: 'center',
         // 배경이 항상 파스텔이라 글자는 모드와 상관없이 어두운 잉크색(contrastText)을 쓴다
-        color: 'primary.contrastText',
+        // 파스텔 배경 위에서는 모드와 상관없이 검정 글자를 쓴다
+        color: 'common.black',
         // 모드에 따라 바뀌는 색은 theme.vars로 가져와야 다크 모드에서도 따라 바뀐다
         boxShadow: (theme) =>
-          `0 16px 40px color-mix(in srgb, ${theme.vars.palette.primary.main} 40%, transparent)`,
-        // 분홍 → 노랑 → 하늘 → 민트로 번지는 몽환적인 배경 위에 흰 빛 번짐을 겹친다
+          `0 16px 40px color-mix(in srgb, ${theme.vars.palette.secondary.main} 40%, transparent)`,
+        // 분홍 → 노랑 → 하늘로 번지는 파스텔 배경 위에 흰 빛 번짐을 겹친다
         background: (theme) =>
-          `radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.55) 0%, transparent 45%), linear-gradient(135deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 35%, ${theme.vars.palette.secondary.main} 70%, ${theme.vars.palette.success.main} 100%)`,
+          `radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.55) 0%, transparent 45%), linear-gradient(135deg, ${theme.vars.palette.info.main} 0%, ${theme.vars.palette.warning.main} 50%, ${theme.vars.palette.secondary.main} 100%)`,
       }}
     >
       <Stack spacing={3} sx={{ alignItems: 'center' }}>
@@ -54,9 +55,9 @@ function HeroSection() {
             target="_blank"
             rel="noopener noreferrer"
             sx={{
-              color: 'primary.contrastText',
-              borderColor: 'primary.contrastText',
-              '&:hover': { borderColor: 'primary.contrastText', bgcolor: 'rgba(255, 255, 255, 0.4)' },
+              color: 'common.black',
+              borderColor: 'common.black',
+              '&:hover': { borderColor: 'common.black', bgcolor: 'rgba(255, 255, 255, 0.4)' },
             }}
           >
             글 둘러보기

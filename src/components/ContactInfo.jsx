@@ -10,8 +10,8 @@ const CONTACT_ITEMS = [
 
 const SNS_LINKS = [{ label: 'GitHub', href: 'https://github.com/gyubinpark1029-afk', Icon: GitHubIcon }];
 
-// 테마의 노랑에 빨강(error)을 조금 섞어 따뜻한 주황을 만든다. 테마 변수만 사용한다.
-const WARM_ORANGE = 'color-mix(in srgb, var(--mui-palette-warning-main) 70%, var(--mui-palette-error-main) 30%)';
+// 노랑 카드 안의 아이콘 배경은 테마의 노랑을 그대로 쓴다. 빨강은 넓은 면적에 쓰지 않는다.
+const WARM_ORANGE = 'var(--mui-palette-warning-main)';
 const CREAM = 'color-mix(in srgb, var(--mui-palette-warning-main) 25%, white)';
 
 function ContactInfo() {
