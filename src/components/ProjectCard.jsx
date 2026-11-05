@@ -9,6 +9,17 @@ import getGithubUrl from '../utils/getGithubUrl.js';
 
 const LOADING_MS = 1500;
 
+// 버튼 3개를 한 줄에 같은 폭으로 놓는다. minWidth: 0이 있어야 좁은 화면에서 글자가 줄바꿈되지 않고 칸 안에 맞춰진다.
+const ACTION_BUTTON_SX = {
+  flex: 1,
+  minWidth: 0,
+  minHeight: 48,
+  px: 1,
+  fontSize: '0.875rem',
+  whiteSpace: 'nowrap',
+  '& .MuiButton-startIcon': { mr: 0.5, ml: 0 },
+};
+
 function ProjectCard({ project, onOpenDetails }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isOpening, setIsOpening] = useState(false);
@@ -70,13 +81,13 @@ function ProjectCard({ project, onOpenDetails }) {
           <TechStack items={project.tech_stack} />
         </Stack>
       </CardContent>
-      <CardActions sx={{ px: 2, pb: 2, gap: 1, flexWrap: 'wrap' }}>
+      <CardActions disableSpacing sx={{ px: 2, pb: 2, gap: 1 }}>
         <Button
           variant="contained"
           onClick={handleLiveDemo}
           disabled={isOpening}
           startIcon={isOpening ? <CircularProgress size={16} color="inherit" /> : <OpenInNewIcon />}
-          sx={{ minHeight: 48 }}
+          sx={ACTION_BUTTON_SX}
         >
           Live Demo
         </Button>
@@ -87,12 +98,12 @@ function ProjectCard({ project, onOpenDetails }) {
             target="_blank"
             rel="noopener noreferrer"
             startIcon={<GitHubIcon />}
-            sx={{ minHeight: 48 }}
+            sx={ACTION_BUTTON_SX}
           >
             GitHub
           </Button>
         )}
-        <Button onClick={() => onOpenDetails(project)} sx={{ minHeight: 48 }}>
+        <Button onClick={() => onOpenDetails(project)} sx={ACTION_BUTTON_SX}>
           View Details
         </Button>
       </CardActions>
