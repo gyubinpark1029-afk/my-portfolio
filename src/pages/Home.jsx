@@ -2,6 +2,7 @@ import PageContainer from '../components/PageContainer.jsx';
 import SectionCard from '../components/SectionCard.jsx';
 import ContactInfo from '../components/ContactInfo.jsx';
 import Guestbook from '../components/Guestbook.jsx';
+import ProjectsPreview from '../components/ProjectsPreview.jsx';
 
 const SECTIONS = [
   {
@@ -21,8 +22,9 @@ const SECTIONS = [
   },
   {
     title: 'Projects',
-    description: "여기는 Projects 섹션입니다. 대표작 썸네일 3-4개와 '더 보기' 버튼이 들어갈 예정입니다.",
+    description: '직접 만들고 배포한 프로젝트들이에요.',
     color: 'info',
+    children: <ProjectsPreview />,
   },
   {
     title: 'Contact',
