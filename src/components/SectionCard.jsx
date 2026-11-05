@@ -11,7 +11,8 @@ function SectionCard({ title, description, color, children }) {
         color: color ? `${color}.contrastText` : 'text.primary',
       }}
     >
-      <CardContent sx={{ py: { xs: 5, md: 8 }, px: 3 }}>
+      {/* 위쪽 여백은 요청에 따라 35px로 고정한다. (8의 배수가 아닌 예외 값) */}
+      <CardContent sx={{ pt: '35px', pb: { xs: 5, md: 8 }, px: 3 }}>
         <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 500 }}>
           {title}
         </Typography>
