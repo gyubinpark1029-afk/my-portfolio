@@ -1,7 +1,5 @@
 import { Link as RouterLink, NavLink } from 'react-router-dom';
-import { AppBar, Toolbar, Container, Button, IconButton, Stack, Typography, useColorScheme } from '@mui/material';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import { AppBar, Toolbar, Container, Button, Stack, Typography } from '@mui/material';
 
 const NAV_ITEMS = [
   { label: 'Home', path: '/' },
@@ -10,18 +8,12 @@ const NAV_ITEMS = [
 ];
 
 function NavBar() {
-  const { mode, systemMode, setMode } = useColorScheme();
-  // 모드가 'system'이면 컴퓨터 설정에 따라 실제로 보이는 모드를 계산한다.
-  const isDarkMode = (mode === 'system' ? systemMode : mode) === 'dark';
-
-  const handleToggleMode = () => setMode(isDarkMode ? 'light' : 'dark');
-
   return (
     <AppBar position="sticky" color="primary" elevation={0}>
       <Container maxWidth="md">
-        {/* 좁은 화면에서는 오른쪽 아이콘과 겹치지 않도록 메뉴를 왼쪽에 붙인다. */}
+        {/* 좁은 화면에서는 메뉴가 왼쪽에 붙는다. */}
         <Toolbar disableGutters sx={{ position: 'relative', justifyContent: { xs: 'flex-start', sm: 'center' } }}>
-          {/* 좁은 화면에서는 메뉴와 아이콘만으로 자리가 꽉 차서 사이트 이름을 숨긴다. */}
+          {/* 좁은 화면에서는 메뉴만으로 자리가 꽉 차서 사이트 이름을 숨긴다. */}
           <Button
             component={RouterLink}
             to="/"
@@ -48,15 +40,6 @@ function NavBar() {
                 {item.label}
               </Button>
             ))}
-          </Stack>
-          <Stack direction="row" sx={{ position: 'absolute', right: 0 }}>
-            <IconButton
-              color="inherit"
-              onClick={handleToggleMode}
-              aria-label={isDarkMode ? '라이트 모드로 바꾸기' : '다크 모드로 바꾸기'}
-            >
-              {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
           </Stack>
         </Toolbar>
       </Container>
