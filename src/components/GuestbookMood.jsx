@@ -14,7 +14,17 @@ function GuestbookMood({ emoji, rating, onEmojiChange, onRatingChange }) {
           aria-label="이모지 선택"
         >
           {EMOJIS.map((item) => (
-            <ToggleButton key={item} value={item} sx={{ width: 48, height: 48, fontSize: '1.25rem' }}>
+            <ToggleButton
+              key={item}
+              value={item}
+              sx={{
+                width: 48,
+                height: 48,
+                fontSize: '1.25rem',
+                borderRadius: 0,
+                '&.Mui-selected, &.Mui-selected:hover': { bgcolor: 'accent.main' },
+              }}
+            >
               {item}
             </ToggleButton>
           ))}
@@ -22,7 +32,12 @@ function GuestbookMood({ emoji, rating, onEmojiChange, onRatingChange }) {
       </Stack>
       <Stack spacing={1}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>별점을 남겨 주세요</Typography>
-        <Rating size="large" value={rating} onChange={(_, value) => onRatingChange(value)} />
+        <Rating
+          size="large"
+          value={rating}
+          onChange={(_, value) => onRatingChange(value)}
+          sx={{ '& .MuiRating-iconFilled': { color: 'accent.main' } }}
+        />
       </Stack>
     </Stack>
   );

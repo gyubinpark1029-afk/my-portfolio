@@ -54,9 +54,15 @@ function GuestbookForm({ onSubmitted }) {
       component="form"
       spacing={3}
       onSubmit={handleSubmit}
-      sx={{ p: 3, borderRadius: 1, bgcolor: 'background.paper', color: 'text.primary', textAlign: 'left' }}
+      sx={{ p: 3, borderRadius: 0, border: 1, borderColor: 'text.primary', bgcolor: 'background.paper', color: 'text.primary', textAlign: 'left' }}
     >
-      <Typography variant="h6" component="h3">방명록 남기기 ✍️</Typography>
+      <Typography
+        variant="h6"
+        component="h3"
+        sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+      >
+        방명록 남기기
+      </Typography>
       <GuestbookField
         label="이름"
         placeholder="어떻게 불러드릴까요?"
@@ -108,7 +114,15 @@ function GuestbookForm({ onSubmitted }) {
         />
       </Box>
       {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-      <Button type="submit" variant="contained" color="warning" size="large" endIcon={<SendIcon />} disabled={isSending}>
+      <Button
+        type="submit"
+        variant="contained"
+        size="large"
+        endIcon={<SendIcon />}
+        disabled={isSending}
+        // 검정 버튼에 마우스를 올리면 파란 포인트색으로 바뀐다.
+        sx={{ borderRadius: 0, '&:hover': { bgcolor: 'accent.main' } }}
+      >
         {isSending ? '남기는 중...' : '남기기'}
       </Button>
       <Snackbar

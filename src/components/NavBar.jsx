@@ -9,7 +9,13 @@ const NAV_ITEMS = [
 
 function NavBar() {
   return (
-    <AppBar position="sticky" color="primary" elevation={0}>
+    // 흰 바탕 + 검정 글자 + 파란 밑줄: 레퍼런스처럼 가볍고 깔끔한 상단 메뉴
+    <AppBar
+      position="sticky"
+      color="inherit"
+      elevation={0}
+      sx={{ bgcolor: 'background.paper', color: 'text.primary', borderBottom: 1, borderColor: 'divider' }}
+    >
       <Container maxWidth="md">
         {/* 좁은 화면에서는 메뉴가 왼쪽에 붙는다. */}
         <Toolbar disableGutters sx={{ position: 'relative', justifyContent: { xs: 'flex-start', sm: 'center' } }}>
@@ -21,7 +27,16 @@ function NavBar() {
             aria-label="홈으로 가기"
             sx={{ position: 'absolute', left: 0, display: { xs: 'none', sm: 'inline-flex' } }}
           >
-            <Typography variant="h6" component="span" sx={{ fontSize: '1.0625rem', fontWeight: 700, textTransform: 'none' }}>
+            <Typography
+              variant="h6"
+              component="span"
+              sx={(theme) => ({
+                fontFamily: theme.typography.fontFamilyPoint,
+                fontSize: '1.0625rem',
+                fontWeight: 700,
+                textTransform: 'none',
+              })}
+            >
               MY portfolio
             </Typography>
           </Button>
@@ -34,7 +49,11 @@ function NavBar() {
                 end
                 color="inherit"
                 sx={{
-                  '&.active': { bgcolor: 'background.paper', color: 'text.primary' },
+                  borderRadius: 0,
+                  borderBottom: 2,
+                  borderColor: 'transparent',
+                  '&:hover': { bgcolor: 'transparent', color: 'accent.main' },
+                  '&.active': { color: 'accent.main', borderColor: 'accent.main' },
                 }}
               >
                 {item.label}

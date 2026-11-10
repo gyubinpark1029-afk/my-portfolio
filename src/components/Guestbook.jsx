@@ -26,7 +26,13 @@ function Guestbook() {
 
   return (
     <Stack spacing={3} sx={{ mt: 5 }}>
-      <Typography variant="h6" component="h3" sx={{ textAlign: 'left' }}>방명록 🧡</Typography>
+      <Typography
+        variant="h5"
+        component="h3"
+        sx={(theme) => ({ textAlign: 'left', fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+      >
+        방명록
+      </Typography>
       <GuestbookForm onSubmitted={loadEntries} />
       <GuestbookList entries={entries} isLoading={isLoading} hasError={hasError} />
     </Stack>

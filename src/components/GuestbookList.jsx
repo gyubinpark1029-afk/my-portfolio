@@ -15,12 +15,16 @@ function GuestbookList({ entries, isLoading, hasError }) {
         <Stack
           key={entry.id}
           spacing={1}
-          sx={{ p: 2, borderRadius: 1, bgcolor: 'background.paper', color: 'text.primary', textAlign: 'left' }}
+          sx={{ p: 2, borderRadius: 0, border: 1, borderColor: 'divider', bgcolor: 'background.paper', color: 'text.primary', textAlign: 'left' }}
         >
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <Typography component="span" sx={{ fontSize: '1.5rem' }}>{entry.emoji}</Typography>
-            <Typography sx={{ fontWeight: 500 }}>{entry.name}</Typography>
-            {entry.rating && <Rating value={entry.rating} size="small" readOnly />}
+            <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+              {entry.name}
+            </Typography>
+            {entry.rating && (
+              <Rating value={entry.rating} size="small" readOnly sx={{ '& .MuiRating-iconFilled': { color: 'accent.main' } }} />
+            )}
           </Stack>
           <Typography sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{entry.message}</Typography>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>{formatDate(entry.created_at)}</Typography>

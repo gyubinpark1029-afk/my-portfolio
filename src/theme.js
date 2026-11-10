@@ -15,6 +15,8 @@ const theme = createTheme({
         secondary: { main: '#98c5d3', contrastText: '#000000' },
         info: { main: '#f8c8d8', contrastText: '#000000' },
         purple: { main: '#a67eb1', contrastText: '#000000' },
+        // 레퍼런스 사이트에서 가져온 코발트 블루. 흑백 화면에서 포인트로만 쓴다.
+        accent: { main: '#0600e8', contrastText: '#ffffff' },
         warning: { main: '#fdcf85', contrastText: '#000000' },
         success: { main: '#68c74e', contrastText: '#000000' },
         error: { main: '#e43e39', contrastText: '#ffffff' },
@@ -25,7 +27,9 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Malgun Gothic", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Pretendard", "Roboto", "Malgun Gothic", "Helvetica", "Arial", sans-serif',
+    // 큰 제목 등 포인트로만 쓰는 폰트. sx에서 theme.typography.fontFamilyPoint로 가져온다.
+    fontFamilyPoint: '"GmarketSans", "Pretendard", sans-serif',
     h1: {
       fontSize: '2.125rem',
       fontWeight: 500,

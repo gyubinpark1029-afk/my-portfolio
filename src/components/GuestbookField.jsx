@@ -40,11 +40,15 @@ function GuestbookField({ value, onChange, icon: Icon, slotProps, ...props }) {
         },
       }}
       sx={{
+        // 레퍼런스처럼 각진 입력칸. 포커스와 입력된 상태는 파란 포인트색으로 보여준다.
+        '& .MuiOutlinedInput-root': { borderRadius: 0 },
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: 'accent.main' },
+        '& .MuiInputLabel-root.Mui-focused': { color: 'accent.main' },
         animation: isShaking ? `${shake} 0.25s` : 'none',
-        // 내용이 있으면 마우스를 올려도 핑크 테두리를 유지한다.
+        // 내용이 있으면 마우스를 올려도 파란 테두리를 유지한다.
         ...(value && {
           '& .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'primary.main',
+            borderColor: 'accent.main',
             borderWidth: 2,
           },
         }),
