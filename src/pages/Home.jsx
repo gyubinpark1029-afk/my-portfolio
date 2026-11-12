@@ -5,7 +5,7 @@ import Guestbook from '../components/Guestbook.jsx';
 import ProjectsPreview from '../components/ProjectsPreview.jsx';
 import AboutPreview from '../components/AboutPreview.jsx';
 import HeroSection from '../components/HeroSection.jsx';
-import SkillSection from '../components/SkillSection.jsx';
+import SkillsPreview from '../components/SkillsPreview.jsx';
 const SECTIONS = [
   {
     title: 'About Me',
@@ -15,8 +15,8 @@ const SECTIONS = [
   },
   {
     title: 'Skill Tree',
-    description: '주로 다루는 기술이에요. 카드에 마우스를 올려 보세요.',
-    children: <SkillSection />,
+    description: '가장 자신 있는 기술이에요. 카드에 마우스를 올려 보세요.',
+    children: <SkillsPreview />,
   },
   {
     title: 'Projects',
