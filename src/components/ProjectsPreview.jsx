@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, CircularProgress } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Box, CircularProgress } from '@mui/material';
 import ProjectCard from './ProjectCard.jsx';
 import ProjectDetailDialog from './ProjectDetailDialog.jsx';
 import supabase from '../supabaseClient.js';
 
 const PREVIEW_COUNT = 4;
 
-// 홈 화면용: 대표 프로젝트 몇 개만 보여 주고 전체 목록 페이지로 안내한다.
+// 홈 화면용: 대표 프로젝트 몇 개만 보여 준다. 전체 목록은 위 메뉴의 Projects에서 볼 수 있다.
 function ProjectsPreview() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,16 +34,6 @@ function ProjectsPreview() {
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} onOpenDetails={setSelectedProject} />
         ))}
-      </Box>
-      <Box sx={{ textAlign: 'center', mt: 3 }}>
-        <Button
-          variant="contained"
-          component={RouterLink}
-          to="/projects"
-          sx={{ minHeight: 48, borderRadius: 0, '&:hover': { bgcolor: 'accent.main' } }}
-        >
-          더 보기
-        </Button>
       </Box>
       <ProjectDetailDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
     </Box>
