@@ -91,7 +91,7 @@ function ProjectCard({ project, onOpenDetails }) {
           <Typography
             variant="h6"
             component="h3"
-            sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+            sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}
           >
             {project.title}
           </Typography>

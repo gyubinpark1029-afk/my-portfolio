@@ -34,7 +34,16 @@ function SectionCard({ title, description, to, number, children }) {
         {title}
       </Typography>
       <Divider sx={{ borderColor: 'currentColor', opacity: 0.3, mb: 3 }} />
-      <Typography>{description}</Typography>
+      {/* 레퍼런스처럼 제목 아래 설명은 가는 포인트 폰트에 회색으로 둔다. */}
+      <Typography
+        sx={(theme) => ({
+          fontFamily: theme.typography.fontFamilyPoint,
+          fontWeight: 300,
+          color: 'text.secondary',
+        })}
+      >
+        {description}
+      </Typography>
       {children}
     </CardContent>
   );

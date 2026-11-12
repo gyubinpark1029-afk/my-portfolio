@@ -28,7 +28,7 @@ function AboutSectionAccordion({ sections, expandedId, onChange, isEditing = fal
               <Typography
                 variant="h6"
                 component="h2"
-                sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+                sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}
               >
                 {section.title}
               </Typography>

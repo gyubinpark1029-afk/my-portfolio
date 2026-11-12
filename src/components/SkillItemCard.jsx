@@ -29,7 +29,7 @@ function SkillItemCard({ skill }) {
         }}
       >
         <SkillIcon skill={skill} />
-        <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+        <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}>
           {skill.name}
         </Typography>
       </Stack>

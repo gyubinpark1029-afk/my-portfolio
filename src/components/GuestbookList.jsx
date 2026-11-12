@@ -19,7 +19,7 @@ function GuestbookList({ entries, isLoading, hasError }) {
         >
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <Typography component="span" sx={{ fontSize: '1.5rem' }}>{entry.emoji}</Typography>
-            <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+            <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}>
               {entry.name}
             </Typography>
             {entry.rating && (

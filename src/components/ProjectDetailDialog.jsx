@@ -21,7 +21,7 @@ function ProjectDetailDialog({ project, onClose }) {
     >
       {project && (
         <>
-          <DialogTitle sx={(currentTheme) => ({ fontFamily: currentTheme.typography.fontFamilyPoint, fontWeight: 700 })}>
+          <DialogTitle sx={(currentTheme) => ({ fontFamily: currentTheme.typography.fontFamilyPoint, fontWeight: 500 })}>
             {project.title}
           </DialogTitle>
           <DialogContent>

@@ -17,7 +17,7 @@ function SkillCategoryList({ skills }) {
           <section key={category} aria-label={`${category} 스킬`}>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
               <Box sx={{ width: 16, height: 16, border: 1, borderColor: 'text.primary', bgcolor: `${color}.main` }} />
-              <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, letterSpacing: 2 })}>
+              <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500, letterSpacing: 2 })}>
                 {category}
               </Typography>
             </Stack>

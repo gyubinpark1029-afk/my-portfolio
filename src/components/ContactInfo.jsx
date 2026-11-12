@@ -72,7 +72,7 @@ function ContactInfo() {
                 underline="hover"
                 sx={(theme) => ({
                   fontFamily: theme.typography.fontFamilyPoint,
-                  fontWeight: 700,
+                  fontWeight: 500,
                   wordBreak: 'break-all',
                   '&:hover': { color: theme.vars.palette.accent.main },
                 })}
@@ -84,7 +84,7 @@ function ContactInfo() {
         ))}
       </Stack>
       <Stack spacing={2} sx={{ ...BOX_SX, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-        <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+        <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}>
           SNS에서도 편하게 만나요
         </Typography>
         <Stack direction="row" spacing={1.5} useFlexGap sx={{ justifyContent: 'center', flexWrap: 'wrap' }}>

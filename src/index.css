@@ -1,6 +1,21 @@
 /* 전역 스타일은 CssBaseline과 theme.js가 담당한다. */
 
-/* 포인트 폰트(제목·큰 글자용). 굵고 둥근 개성 있는 폰트다. */
+/* 포인트 폰트(제목·큰 글자용). 굵고 둥근 개성 있는 폰트다.
+   레퍼런스 사이트처럼 굵기를 나눠 쓴다: 큰 제목 700, 작은 제목 500, 회색 설명글 300. */
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+}
+
 @font-face {
   font-family: 'GmarketSans';
   font-weight: 700;

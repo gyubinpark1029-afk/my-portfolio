@@ -59,7 +59,7 @@ function GuestbookForm({ onSubmitted }) {
       <Typography
         variant="h6"
         component="h3"
-        sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+        sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}
       >
         방명록 남기기
       </Typography>

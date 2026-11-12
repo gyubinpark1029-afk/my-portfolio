@@ -40,7 +40,7 @@ function AddSkillDialog({ isOpen, onClose, onAdd }) {
         },
       }}
     >
-      <DialogTitle sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+      <DialogTitle sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}>
         스킬 추가
       </DialogTitle>
       <DialogContent>

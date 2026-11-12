@@ -25,7 +25,7 @@ function AboutPreview() {
                 <Typography
                   variant="h6"
                   component="h3"
-                  sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, mb: 2 })}
+                  sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500, mb: 2 })}
                 >
                   {item.title}
                 </Typography>
