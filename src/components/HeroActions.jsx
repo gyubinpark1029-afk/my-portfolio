@@ -19,18 +19,28 @@ const SOCIAL_LINKS = [
 ];
 
 // Hero의 다음 행동 안내: 프로젝트 보기(주요) > 연락하기(보조) > 소셜 링크
-function HeroActions() {
+// 모바일에서는 버튼을 세로로 쌓고 가로 전체 폭으로 키워서, 엄지로 누르기 쉽게 한다. (모든 버튼 높이 44px 이상)
+function HeroActions({ isMobile = false }) {
   return (
     <Stack
-      direction="row"
+      direction={isMobile ? 'column' : 'row'}
       spacing={2}
       useFlexGap
-      sx={{ alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' }, flexWrap: 'wrap', mt: 4 }}
+      sx={{
+        alignItems: isMobile ? 'stretch' : 'center',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
+        // 너무 넓은 폰(큰 화면의 모바일 구간)에서는 버튼이 끝없이 길어지지 않게 한다.
+        maxWidth: isMobile ? 400 : 'none',
+        mx: isMobile ? 'auto' : 0,
+        mt: isMobile ? 3 : 4,
+      }}
     >
       {/* 주요 버튼: 가장 크고, 파란 바탕에 딱딱한 그림자를 둔다. 누르면 그림자 쪽으로 눌리고 검정으로 바뀐다. */}
       <Button
         variant="contained"
         size="large"
+        fullWidth={isMobile}
         onClick={() => scrollToSection('projects')}
         endIcon={
           <ArrowDownwardIcon
@@ -59,32 +69,36 @@ function HeroActions() {
       {/* 보조 버튼: 테두리만 있어서 주요 버튼보다 조용하지만 같은 줄에서 바로 눌 수 있다. */}
       <Button
         variant="outlined"
+        fullWidth={isMobile}
         onClick={() => scrollToSection('contact')}
-        sx={{ minHeight: 48, px: 3, borderRadius: 0, borderColor: 'text.primary', '&:hover': { borderColor: 'accent.main', color: 'accent.main' } }}
+        sx={{ minHeight: isMobile ? 52 : 48, px: 3, borderRadius: 0, borderColor: 'text.primary', '&:hover': { borderColor: 'accent.main', color: 'accent.main' } }}
       >
         연락하기
       </Button>
-      {SOCIAL_LINKS.map(({ label, href, Icon, isExternal }) => (
-        <IconButton
-          key={label}
-          component="a"
-          href={href}
-          {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
-          aria-label={isExternal ? `${label} (새 탭)` : label}
-          sx={{
-            width: 48,
-            height: 48,
-            border: 1,
-            borderColor: 'text.primary',
-            borderRadius: 0,
-            color: 'text.primary',
-            transition: 'transform 0.2s, background-color 0.2s, color 0.2s',
-            '&:hover': { bgcolor: 'accent.main', borderColor: 'accent.main', color: 'accent.contrastText', transform: 'translateY(-3px)' },
-          }}
-        >
-          <Icon />
-        </IconButton>
-      ))}
+      {/* 소셜 아이콘은 한 줄로 묶어서, 모바일에서 버튼 아래에 가운데로 모인다. (아이콘 사이 16px 간격) */}
+      <Stack direction="row" spacing={2} sx={{ justifyContent: isMobile ? 'center' : 'flex-start' }}>
+        {SOCIAL_LINKS.map(({ label, href, Icon, isExternal }) => (
+          <IconButton
+            key={label}
+            component="a"
+            href={href}
+            {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
+            aria-label={isExternal ? `${label} (새 탭)` : label}
+            sx={{
+              width: 48,
+              height: 48,
+              border: 1,
+              borderColor: 'text.primary',
+              borderRadius: 0,
+              color: 'text.primary',
+              transition: 'transform 0.2s, background-color 0.2s, color 0.2s',
+              '&:hover': { bgcolor: 'accent.main', borderColor: 'accent.main', color: 'accent.contrastText', transform: 'translateY(-3px)' },
+            }}
+          >
+            <Icon />
+          </IconButton>
+        ))}
+      </Stack>
     </Stack>
   );
 }

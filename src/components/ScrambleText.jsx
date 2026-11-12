@@ -5,8 +5,9 @@ import { getScrollTrigger, getTypingSeconds, gsap, isReducedMotion, SCRAMBLE_CHA
 // 스크린 리더만 읽는 글자 (화면에는 보이지 않는다)
 const SR_ONLY_SX = {
   position: 'absolute',
-  width: 1,
-  height: 1,
+  // MUI sx에서 숫자 1은 100%를 뜻해서, 1픽셀은 문자열로 적어야 한다.
+  width: '1px',
+  height: '1px',
   overflow: 'hidden',
   clip: 'rect(0 0 0 0)',
   whiteSpace: 'nowrap',

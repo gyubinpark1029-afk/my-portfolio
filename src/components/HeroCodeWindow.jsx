@@ -42,7 +42,14 @@ const TIMED_LINES = CODE_LINES.reduce((lines, tokens) => {
 const TYPING_END_SECONDS = TIMED_LINES[TIMED_LINES.length - 1].end;
 
 // 개발자 포트폴리오다운 코드 창. 장식이라 스크린 리더에는 읽히지 않는다.
-function HeroCodeWindow() {
+// 태블릿은 칸이 좁아서 글자와 안쪽 여백을 줄이고, 데스크톱은 넉넉하게 쓴다.
+const WINDOW_STYLE = {
+  tablet: { padding: 2, fontSize: 'clamp(0.6875rem, 1.45vw, 1rem)' },
+  desktop: { padding: 3, fontSize: '1rem' },
+};
+
+function HeroCodeWindow({ breakpoint = 'desktop' }) {
+  const { padding, fontSize } = WINDOW_STYLE[breakpoint];
   return (
     <Box
       aria-hidden="true"
@@ -66,7 +73,7 @@ function HeroCodeWindow() {
           developer.js
         </Typography>
       </Stack>
-      <Box sx={{ p: 3, fontFamily: '"Consolas", "Menlo", monospace', fontSize: { md: '0.8125rem', lg: '1rem' }, lineHeight: 1.9, textAlign: 'left' }}>
+      <Box sx={{ p: padding, fontFamily: '"Consolas", "Menlo", monospace', fontSize, lineHeight: 1.9, textAlign: 'left' }}>
         {TIMED_LINES.map(({ tokens, length, delay, end }, index) => (
           <Box
             key={index}
