@@ -12,12 +12,13 @@ function SkillSection() {
             sx={(theme) => ({
               mb: 2,
               fontFamily: theme.typography.fontFamilyPoint,
+              fontWeight: 700,
               letterSpacing: 2,
             })}
           >
             {group.category}
           </Typography>
-          <Stack direction="row" useFlexGap sx={{ flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
+          <Stack direction="row" useFlexGap sx={{ flexWrap: 'wrap', gap: 2, justifyContent: 'flex-start' }}>
             {group.skills.map((skill) => (
               <SkillCard key={skill.id} skill={skill} />
             ))}

@@ -24,7 +24,8 @@ const faceSx = {
   justifyContent: 'center',
   gap: 1,
   p: 2,
-  borderRadius: 1,
+  // 레퍼런스처럼 각진 모서리
+  borderRadius: 0,
   backfaceVisibility: 'hidden',
 };
 
@@ -53,9 +54,11 @@ function SkillCard({ skill }) {
           '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
         }}
       >
-        <Box sx={{ ...faceSx, bgcolor: 'background.paper', border: 1, borderColor: 'divider' }}>
+        <Box sx={{ ...faceSx, bgcolor: 'background.paper', border: 1, borderColor: 'text.primary' }}>
           <Icon sx={{ fontSize: 48, color: 'accent.main' }} />
-          <Typography sx={{ fontWeight: 700 }}>{skill.name}</Typography>
+          <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+            {skill.name}
+          </Typography>
         </Box>
         <Box
           sx={{
