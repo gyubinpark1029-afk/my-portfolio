@@ -10,9 +10,35 @@ const CONTACT_ITEMS = [
 
 const SNS_LINKS = [{ label: 'GitHub', href: 'https://github.com/gyubinpark1029-afk', Icon: GitHubIcon }];
 
-// 노랑 카드 안의 아이콘 배경은 테마의 노랑을 그대로 쓴다. 빨강은 넓은 면적에 쓰지 않는다.
-const WARM_ORANGE = 'var(--mui-palette-warning-main)';
-const CREAM = 'color-mix(in srgb, var(--mui-palette-warning-main) 25%, white)';
+// 레퍼런스 사이트처럼 흰 바탕, 각진 모서리, 검정 테두리로 박스를 만든다.
+const BOX_SX = {
+  p: 3,
+  borderRadius: 0,
+  border: 1,
+  borderColor: 'text.primary',
+  bgcolor: 'background.paper',
+  color: 'text.primary',
+};
+
+// 아이콘 칸은 평소엔 흰 바탕에 검정 선, 마우스를 올리면 파란 포인트색으로 바뀐다.
+const ICON_BOX_SX = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexShrink: 0,
+  width: 48,
+  height: 48,
+  border: 1,
+  borderColor: 'text.primary',
+  borderRadius: 0,
+  transition: 'background-color 0.2s, color 0.2s',
+};
+
+const HOVER_ACCENT_SX = {
+  bgcolor: 'accent.main',
+  borderColor: 'accent.main',
+  color: 'accent.contrastText',
+};
 
 function ContactInfo() {
   return (
@@ -25,38 +51,43 @@ function ContactInfo() {
         textAlign: 'left',
       }}
     >
-      <Stack spacing={2} sx={{ p: 3, borderRadius: 1, bgcolor: CREAM }}>
+      <Stack spacing={2} sx={BOX_SX}>
         {CONTACT_ITEMS.map(({ key, label, value, href, Icon }) => (
-          <Stack key={key} direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                width: 48,
-                height: 48,
-                borderRadius: '50%',
-                bgcolor: WARM_ORANGE,
-              }}
-            >
+          <Stack
+            key={key}
+            direction="row"
+            spacing={2}
+            sx={{ alignItems: 'center', '&:hover .contact-icon': HOVER_ACCENT_SX }}
+          >
+            <Box className="contact-icon" sx={ICON_BOX_SX}>
               <Icon />
             </Box>
             <Box sx={{ minWidth: 0 }}>
-              <Typography variant="body2">{label}</Typography>
-              <Link href={href} color="inherit" underline="hover" sx={{ fontWeight: 500, wordBreak: 'break-all' }}>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {label}
+              </Typography>
+              <Link
+                href={href}
+                color="inherit"
+                underline="hover"
+                sx={(theme) => ({
+                  fontFamily: theme.typography.fontFamilyPoint,
+                  fontWeight: 700,
+                  wordBreak: 'break-all',
+                  '&:hover': { color: theme.vars.palette.accent.main },
+                })}
+              >
                 {value}
               </Link>
             </Box>
           </Stack>
         ))}
       </Stack>
-      <Stack
-        spacing={2}
-        sx={{ p: 3, borderRadius: 1, bgcolor: CREAM, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
-      >
-        <Typography>SNS에서도 편하게 만나요 🧡</Typography>
-        <Stack direction="row" spacing={1.5} useFlexGap sx={{ justifyContent: 'center', flexWrap: 'wrap' }}>
+      <Stack spacing={2} sx={{ ...BOX_SX, alignItems: 'flex-start', justifyContent: 'center' }}>
+        <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
+          SNS에서도 편하게 만나요
+        </Typography>
+        <Stack direction="row" spacing={1.5} useFlexGap sx={{ flexWrap: 'wrap' }}>
           {SNS_LINKS.map(({ label, href, Icon }) => (
             <IconButton
               key={label}
@@ -65,14 +96,7 @@ function ContactInfo() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              sx={{
-                width: 56,
-                height: 56,
-                color: 'inherit',
-                bgcolor: WARM_ORANGE,
-                transition: 'transform 0.2s',
-                '&:hover': { bgcolor: WARM_ORANGE, transform: 'translateY(-4px)' },
-              }}
+              sx={{ ...ICON_BOX_SX, width: 56, height: 56, '&:hover': HOVER_ACCENT_SX }}
             >
               <Icon />
             </IconButton>
