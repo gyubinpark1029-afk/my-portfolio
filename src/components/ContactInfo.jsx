@@ -83,11 +83,11 @@ function ContactInfo() {
           </Stack>
         ))}
       </Stack>
-      <Stack spacing={2} sx={{ ...BOX_SX, alignItems: 'flex-start', justifyContent: 'center' }}>
+      <Stack spacing={2} sx={{ ...BOX_SX, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
         <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}>
           SNS에서도 편하게 만나요
         </Typography>
-        <Stack direction="row" spacing={1.5} useFlexGap sx={{ flexWrap: 'wrap' }}>
+        <Stack direction="row" spacing={1.5} useFlexGap sx={{ justifyContent: 'center', flexWrap: 'wrap' }}>
           {SNS_LINKS.map(({ label, href, Icon }) => (
             <IconButton
               key={label}
