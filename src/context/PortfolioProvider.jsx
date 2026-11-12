@@ -3,9 +3,7 @@ import { PortfolioContext } from './PortfolioContext.js';
 import { aboutMeData as initialAboutMeData } from '../data/aboutMeData.js';
 import { skillsData } from '../data/skillData.js';
 import { makeSummary } from '../utils/makeSummary.js';
-import { pickTopSkills } from '../utils/skillUtils.js';
-
-const HOME_SKILL_COUNT = 4;
+import { sortByLevel } from '../utils/skillUtils.js';
 
 function PortfolioProvider({ children }) {
   const [aboutMeData, setAboutMeData] = useState({ ...initialAboutMeData, skills: skillsData });
@@ -31,7 +29,8 @@ function PortfolioProvider({ children }) {
       content: aboutMeData.sections
         .filter((section) => section.showInHome)
         .map(({ id, title, content }) => ({ id, title, summary: makeSummary(content) })),
-      skills: pickTopSkills(aboutMeData.skills, HOME_SKILL_COUNT),
+      // 스킬은 전부 보여주되, 숙련도 높은 순으로 놓는다.
+      skills: sortByLevel(aboutMeData.skills),
       basicInfo: aboutMeData.basicInfo,
     }),
     [aboutMeData],

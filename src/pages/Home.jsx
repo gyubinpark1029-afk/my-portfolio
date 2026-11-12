@@ -15,7 +15,7 @@ const SECTIONS = [
   },
   {
     title: 'Skill Tree',
-    description: '가장 자신 있는 기술이에요. 카드에 마우스를 올려 보세요.',
+    description: '주로 다루는 기술이에요. 카드에 마우스를 올려 보세요.',
     children: <SkillsPreview />,
   },
   {
