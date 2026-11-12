@@ -15,8 +15,17 @@ function InfoRow({ label, value }) {
 
 function BasicInfoCard({ info }) {
   return (
-    // 테마에 연회색이 따로 없어서, 테마의 글자색(검정)을 흰색에 8%만 섞어 연한 회색을 만든다.
-    <Card sx={{ bgcolor: 'color-mix(in srgb, var(--mui-palette-text-primary) 8%, white)' }}>
+    // 레퍼런스 사이트처럼 흰 바탕, 각진 모서리, 검정 테두리로 만든다.
+    <Card
+      sx={{
+        borderRadius: 0,
+        boxShadow: 'none',
+        border: 1,
+        borderColor: 'text.primary',
+        bgcolor: 'background.paper',
+        color: 'text.primary',
+      }}
+    >
       <CardContent sx={{ p: { xs: 3, md: 5 } }}>
         {/* 좁은 화면에서는 사진이 위, 정보가 아래로 쌓인다. */}
         <Stack
@@ -28,12 +37,25 @@ function BasicInfoCard({ info }) {
           <Avatar
             src={info.photo}
             alt={`${info.name} 프로필 사진`}
-            sx={{ width: 160, height: 160, bgcolor: 'secondary.main', color: 'secondary.contrastText' }}
+            // 사진도 각지게 하고, 검정 테두리를 둘러 박스들과 맞춘다.
+            sx={{
+              width: 160,
+              height: 160,
+              borderRadius: 0,
+              border: 1,
+              borderColor: 'text.primary',
+              bgcolor: 'secondary.main',
+              color: 'secondary.contrastText',
+            }}
           >
             <PetsIcon sx={{ fontSize: 64 }} />
           </Avatar>
           <Stack spacing={1} sx={{ alignItems: { xs: 'center', sm: 'flex-start' } }}>
-            <Typography variant="h4" component="h1" sx={{ fontWeight: 500, mb: 1 }}>
+            <Typography
+              variant="h4"
+              component="h1"
+              sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, mb: 1 })}
+            >
               {info.name}
             </Typography>
             <InfoRow label="학력" value={info.education} />

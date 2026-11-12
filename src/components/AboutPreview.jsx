@@ -11,11 +11,15 @@ function AboutPreview() {
       {/* About Me 탭과 같은 카드를 써서 두 화면의 프로필이 항상 같게 한다. */}
       <BasicInfoCard info={aboutMeData.basicInfo} />
       {/* 테두리 상자 하나에 섹션들을 모아 한 덩어리로 읽히게 한다. */}
-      <Box sx={{ border: 1, borderColor: 'divider', borderRadius: 1, p: { xs: 3, md: 4 } }}>
+      <Box sx={{ border: 1, borderColor: 'text.primary', borderRadius: 0, p: { xs: 3, md: 4 } }}>
         <Stack spacing={4} divider={<Divider flexItem />}>
           {homeSections.map((section) => (
             <div key={section.id}>
-              <Typography variant="h6" component="h3" sx={{ fontWeight: 700, mb: 2 }}>
+              <Typography
+                variant="h6"
+                component="h3"
+                sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, mb: 2 })}
+              >
                 {section.title}
               </Typography>
               <Typography sx={{ lineHeight: 1.8, color: 'text.secondary' }}>
