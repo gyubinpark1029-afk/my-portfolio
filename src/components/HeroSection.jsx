@@ -80,19 +80,21 @@ function HeroSection() {
           variant="h1"
           sx={(theme) => ({
             fontFamily: theme.typography.fontFamilyPoint,
-            // 레퍼런스처럼 화면을 가득 채우는 큰 글자. 두 줄로 나눠 'Code.'를 강조한다.
-            fontSize: { xs: '3.25rem', md: '7rem' },
+            // 한국어 문장은 영어보다 글자 수가 많아서 크기를 줄였다. 두 줄로 나눠 둘째 줄의 '쓰기 좋게'를 강조한다.
+            fontSize: { xs: '1.75rem', sm: '3rem', md: '5rem' },
             fontWeight: 700,
-            // 'Design'의 g 꼬리가 아래 줄 글자와 겹치지 않도록 줄 간격을 살짝 넓힌다.
-            lineHeight: 1.15,
+            lineHeight: 1.25,
             letterSpacing: '-0.02em',
+            // 단어 중간이 아니라 띄어쓰기에서만 줄이 바뀌게 한다.
+            wordBreak: 'keep-all',
           })}
         >
-          Design meets
+          보기 좋은 화면을,
           <br />
           <Box component="span" sx={{ color: 'accent.main' }}>
-            Code.
-          </Box>
+            쓰기 좋게
+          </Box>{' '}
+          만듭니다.
         </Typography>
         {/* 같은 말을 되풀이하던 두 줄을, 무엇을 하는지 말해 주는 한 줄로 합쳤다. */}
         <Typography sx={{ mt: 3, mb: 3, fontSize: { xs: '1rem', md: '1.25rem' } }}>
