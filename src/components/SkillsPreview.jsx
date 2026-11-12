@@ -1,14 +1,12 @@
 import { Box, Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import SkillItemCard from './SkillItemCard.jsx';
-import { skillsData } from '../data/skillData.js';
-import { pickTopSkills } from '../utils/skillUtils.js';
+import { usePortfolio } from '../context/PortfolioContext.js';
 
-const PREVIEW_COUNT = 4;
-
-// 홈 탭용 미리보기. 메인 스킬(isMain) 중 숙련도가 높은 순으로 몇 개만 보여주고, About Me 탭으로 안내한다.
+// 홈 탭용 미리보기. Context가 골라 준 상위 스킬을 보여주고, About Me 탭으로 안내한다.
 function SkillsPreview() {
-  const topSkills = pickTopSkills(skillsData, PREVIEW_COUNT, true);
+  const { getHomeData } = usePortfolio();
+  const topSkills = getHomeData().skills;
 
   return (
     <Box sx={{ mt: 4, textAlign: 'left' }}>

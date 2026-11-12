@@ -3,21 +3,14 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SkillItemCard from './SkillItemCard.jsx';
 import AddSkillDialog from './AddSkillDialog.jsx';
-import {
-  DEFAULT_CATEGORY_COLOR, SKILL_CATEGORIES, SKILL_CATEGORY_COLORS, skillsData,
-} from '../data/skillData.js';
+import { DEFAULT_CATEGORY_COLOR, SKILL_CATEGORIES, SKILL_CATEGORY_COLORS } from '../data/skillData.js';
+import { usePortfolio } from '../context/PortfolioContext.js';
 
 // About Me 탭의 스킬 섹션. 카테고리별로 묶어 반응형 그리드(1열 -> 2열 -> 3열)로 보여준다.
 function AboutSkills() {
-  const [skills, setSkills] = useState(skillsData);
+  const { aboutMeData, addSkill } = usePortfolio();
+  const skills = aboutMeData.skills;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const handleAdd = (newSkill) => {
-    setSkills((prev) => {
-      const nextId = Math.max(0, ...prev.map((skill) => skill.id)) + 1;
-      return [...prev, { ...newSkill, id: nextId, icon: 'code', isMain: false }];
-    });
-  };
 
   // 정해 둔 순서의 카테고리를 먼저 보여주고, 스킬이 없는 카테고리는 건너뛴다.
   const categories = SKILL_CATEGORIES.filter((category) => skills.some((skill) => skill.category === category));
@@ -61,7 +54,7 @@ function AboutSkills() {
           </div>
         );
       })}
-      <AddSkillDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} onAdd={handleAdd} />
+      <AddSkillDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} onAdd={addSkill} />
     </Stack>
   );
 }

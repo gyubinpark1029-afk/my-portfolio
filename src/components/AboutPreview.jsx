@@ -1,34 +1,57 @@
-import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
 import BasicInfoCard from './BasicInfoCard.jsx';
-import { aboutMeData } from '../data/aboutMeData.js';
+import SkillIcon from './SkillIcon.jsx';
+import { usePortfolio } from '../context/PortfolioContext.js';
 
-// 홈 탭용 미리보기. 프로필 카드와, showInHome이 true인 섹션만 보여준다.
+// 홈 탭용 미리보기. 왼쪽에는 showInHome 섹션의 요약, 오른쪽에는 프로필 카드, 아래에는 주요 스킬 아이콘을 보여준다.
+// 데이터는 Context에서 받아서, About Me 탭에서 고친 내용이 바로 반영된다.
 function AboutPreview() {
-  const homeSections = aboutMeData.sections.filter((section) => section.showInHome);
+  const { getHomeData } = usePortfolio();
+  const { content, skills, basicInfo } = getHomeData();
 
   return (
     <Stack spacing={3} sx={{ mt: 3, textAlign: 'left' }}>
-      {/* About Me 탭과 같은 카드를 써서 두 화면의 프로필이 항상 같게 한다. */}
-      <BasicInfoCard info={aboutMeData.basicInfo} />
-      {/* 테두리 상자 하나에 섹션들을 모아 한 덩어리로 읽히게 한다. */}
-      <Box sx={{ border: 1, borderColor: 'text.primary', borderRadius: 0, p: { xs: 3, md: 4 } }}>
-        <Stack spacing={4} divider={<Divider flexItem />}>
-          {homeSections.map((section) => (
-            <div key={section.id}>
-              <Typography
-                variant="h6"
-                component="h3"
-                sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, mb: 2 })}
-              >
-                {section.title}
-              </Typography>
-              <Typography sx={{ lineHeight: 1.8, color: 'text.secondary' }}>
-                {section.content}
-              </Typography>
-            </div>
-          ))}
-        </Stack>
+      <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', md: '1fr 320px' } }}>
+        {/* 테두리 상자 하나에 섹션들을 모아 한 덩어리로 읽히게 한다. 요약은 3줄까지만 보인다. */}
+        <Box sx={{ border: 1, borderColor: 'text.primary', borderRadius: 0, p: { xs: 3, md: 4 } }}>
+          <Stack spacing={4} divider={<Divider flexItem />}>
+            {content.map((item) => (
+              <div key={item.id}>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, mb: 2 })}
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  sx={{
+                    lineHeight: 1.8,
+                    color: 'text.secondary',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {item.summary}
+                </Typography>
+              </div>
+            ))}
+          </Stack>
+        </Box>
+        {/* About Me 탭과 같은 카드를 써서 두 화면의 프로필이 항상 같게 한다. */}
+        <BasicInfoCard info={basicInfo} isStacked />
       </Box>
+      <Stack direction="row" spacing={2} useFlexGap sx={{ flexWrap: 'wrap' }}>
+        {skills.map((skill) => (
+          <Tooltip key={skill.id} title={skill.name} arrow slotProps={{ tooltip: { sx: { borderRadius: 0 } } }}>
+            <Box tabIndex={0} aria-label={skill.name} sx={{ outline: 'none', '&:focus-visible': { outline: 2 } }}>
+              <SkillIcon skill={skill} size={56} />
+            </Box>
+          </Tooltip>
+        ))}
+      </Stack>
     </Stack>
   );
 }

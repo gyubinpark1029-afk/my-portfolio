@@ -13,7 +13,8 @@ function InfoRow({ label, value }) {
   );
 }
 
-function BasicInfoCard({ info }) {
+// isStacked가 true이면 화면 크기와 상관없이 사진이 위, 정보가 아래로 쌓인다. (좁은 옆칸용)
+function BasicInfoCard({ info, isStacked = false }) {
   return (
     // 레퍼런스 사이트처럼 흰 바탕, 각진 모서리, 검정 테두리로 만든다.
     <Card
@@ -29,8 +30,8 @@ function BasicInfoCard({ info }) {
       <CardContent sx={{ p: { xs: 3, md: 5 } }}>
         {/* 좁은 화면에서는 사진이 위, 정보가 아래로 쌓인다. */}
         <Stack
-          direction={{ xs: 'column', sm: 'row' }}
-          spacing={{ xs: 3, sm: 5 }}
+          direction={isStacked ? 'column' : { xs: 'column', sm: 'row' }}
+          spacing={isStacked ? 3 : { xs: 3, sm: 5 }}
           sx={{ alignItems: 'center' }}
         >
           {/* 사진을 못 불러오면 Avatar가 children(고양이 발자국 아이콘)을 대신 보여준다. */}
@@ -49,7 +50,7 @@ function BasicInfoCard({ info }) {
           >
             <PetsIcon sx={{ fontSize: 64 }} />
           </Avatar>
-          <Stack spacing={1} sx={{ alignItems: { xs: 'center', sm: 'flex-start' } }}>
+          <Stack spacing={1} sx={{ alignItems: isStacked ? 'center' : { xs: 'center', sm: 'flex-start' } }}>
             <Typography
               variant="h4"
               component="h1"

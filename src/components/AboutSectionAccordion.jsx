@@ -1,8 +1,9 @@
-import { Accordion, AccordionDetails, AccordionSummary, Chip, Stack, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Chip, Stack, TextField, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // expandedId와 onChange는 부모가 관리한다. 한 번에 하나만 열리게 하려는 목적이다.
-function AboutSectionAccordion({ sections, expandedId, onChange }) {
+// isEditing이 true이면 내용을 입력칸으로 바꿔서, 고친 글을 onContentChange로 부모에게 알린다.
+function AboutSectionAccordion({ sections, expandedId, onChange, isEditing = false, onContentChange }) {
   return (
     <div>
       {sections.map((section) => (
@@ -35,7 +36,19 @@ function AboutSectionAccordion({ sections, expandedId, onChange }) {
             </Stack>
           </AccordionSummary>
           <AccordionDetails sx={{ px: 3, pb: 3 }}>
-            <Typography sx={{ lineHeight: 1.8 }}>{section.content}</Typography>
+            {isEditing ? (
+              <TextField
+                multiline
+                fullWidth
+                minRows={3}
+                value={section.content}
+                onChange={(event) => onContentChange(section.id, event.target.value)}
+                slotProps={{ htmlInput: { 'aria-label': `${section.title} 내용` } }}
+                sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }}
+              />
+            ) : (
+              <Typography sx={{ lineHeight: 1.8 }}>{section.content}</Typography>
+            )}
           </AccordionDetails>
         </Accordion>
       ))}

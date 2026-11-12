@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import App from './App.jsx';
+import PortfolioProvider from './context/PortfolioProvider.jsx';
 import theme from './theme.js';
 import './index.css';
 
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <HashRouter>
-        <App />
+        <PortfolioProvider>
+          <App />
+        </PortfolioProvider>
       </HashRouter>
     </ThemeProvider>
   </React.StrictMode>,
