@@ -25,7 +25,7 @@ function TechChip({ name }) {
   ) : undefined;
 
   // 아이콘을 못 불러와도 이름은 항상 보이도록 라벨을 함께 둔다.
-  return <Chip size="small" variant="outlined" icon={icon} label={name} sx={{ '& img': { ml: 1 } }} />;
+  return <Chip size="small" variant="outlined" icon={icon} label={name} sx={{ borderRadius: 0, borderColor: 'text.primary', '& img': { ml: 1 } }} />;
 }
 
 function TechStack({ items }) {

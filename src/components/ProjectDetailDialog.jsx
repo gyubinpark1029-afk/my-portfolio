@@ -10,17 +10,27 @@ function ProjectDetailDialog({ project, onClose }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Dialog open={Boolean(project)} onClose={onClose} fullScreen={isMobile} fullWidth maxWidth="sm">
+    <Dialog
+      open={Boolean(project)}
+      onClose={onClose}
+      fullScreen={isMobile}
+      fullWidth
+      maxWidth="sm"
+      // 팝업도 흰 바탕에 각진 모서리, 검정 테두리로 맞춘다.
+      slotProps={{ paper: { sx: { borderRadius: 0, boxShadow: 'none', border: 1, borderColor: 'text.primary' } } }}
+    >
       {project && (
         <>
-          <DialogTitle>{project.title}</DialogTitle>
+          <DialogTitle sx={(currentTheme) => ({ fontFamily: currentTheme.typography.fontFamilyPoint, fontWeight: 700 })}>
+            {project.title}
+          </DialogTitle>
           <DialogContent>
             <Stack spacing={2}>
               <Box
                 component="img"
                 src={project.thumbnail_url}
                 alt={`${project.title} 스크린샷`}
-                sx={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'top', borderRadius: 2 }}
+                sx={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'top', border: 1, borderColor: 'text.primary' }}
               />
               <Typography>{project.description}</Typography>
               <TechStack items={project.tech_stack} />
@@ -30,13 +40,15 @@ function ProjectDetailDialog({ project, onClose }) {
             </Stack>
           </DialogContent>
           <DialogActions sx={{ p: 2 }}>
-            <Button onClick={onClose} sx={{ minHeight: 48 }}>닫기</Button>
+            <Button onClick={onClose} sx={{ minHeight: 48, borderRadius: 0, '&:hover': { color: 'accent.main' } }}>
+              닫기
+            </Button>
             <Button
               variant="contained"
               href={project.detail_url}
               target="_blank"
               rel="noopener noreferrer"
-              sx={{ minHeight: 48 }}
+              sx={{ minHeight: 48, borderRadius: 0, '&:hover': { bgcolor: 'accent.main' } }}
             >
               사이트 방문
             </Button>

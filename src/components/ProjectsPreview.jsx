@@ -37,7 +37,12 @@ function ProjectsPreview() {
         ))}
       </Box>
       <Box sx={{ textAlign: 'center', mt: 3 }}>
-        <Button variant="contained" component={RouterLink} to="/projects" sx={{ minHeight: 48 }}>
+        <Button
+          variant="contained"
+          component={RouterLink}
+          to="/projects"
+          sx={{ minHeight: 48, borderRadius: 0, '&:hover': { bgcolor: 'accent.main' } }}
+        >
           더 보기
         </Button>
       </Box>

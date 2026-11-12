@@ -26,11 +26,17 @@ function Projects() {
 
   return (
     <PageContainer maxWidth="lg">
-      <Typography variant="h5" component="h2" sx={{ fontWeight: 500 }}>Projects</Typography>
+      <Typography
+        variant="h5"
+        component="h2"
+        sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+      >
+        Projects
+      </Typography>
       {isLoading && (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}><CircularProgress /></Box>
       )}
-      {hasError && <Alert severity="error">프로젝트를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</Alert>}
+      {hasError && <Alert severity="error" sx={{ borderRadius: 0 }}>프로젝트를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</Alert>}
       {!isLoading && !hasError && projects.length === 0 && (
         <Typography color="text.secondary">아직 등록된 프로젝트가 없어요.</Typography>
       )}

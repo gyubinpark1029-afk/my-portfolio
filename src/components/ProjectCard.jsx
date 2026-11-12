@@ -17,6 +17,8 @@ const ACTION_BUTTON_SX = {
   px: 1,
   fontSize: '0.875rem',
   whiteSpace: 'nowrap',
+  // 레퍼런스처럼 각진 버튼. 검정 버튼에 마우스를 올리면 파란 포인트색으로 바뀐다.
+  borderRadius: 0,
   '& .MuiButton-startIcon': { mr: 0.5, ml: 0 },
 };
 
@@ -39,17 +41,32 @@ function ProjectCard({ project, onOpenDetails }) {
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        transition: 'transform 0.2s, box-shadow 0.2s',
+        // 흰 바탕, 각진 모서리, 검정 테두리. 그림자 대신 테두리 색으로 반응을 보여 준다.
+        borderRadius: 0,
+        boxShadow: 'none',
+        border: 1,
+        borderColor: 'text.primary',
+        bgcolor: 'background.paper',
+        color: 'text.primary',
+        transition: 'transform 0.2s, border-color 0.2s',
         // 터치 화면에서는 누르는 순간 살짝 눌리는 피드백을 준다.
         '&:active': { transform: 'scale(0.98)' },
         // 마우스가 있는 기기에서만 카드 전체를 확대한다. zIndex는 옆 카드 위로 올라오게 한다.
-        // 확대와 함께 그림자도 더 진하고 넓게 만들어 떠오르는 느낌을 준다.
         '@media (hover: hover)': {
-          '&:hover': { transform: 'scale(1.02)', zIndex: 1, boxShadow: '0 16px 40px rgba(0, 0, 0, 0.28)' },
+          '&:hover': { transform: 'scale(1.02)', zIndex: 1, borderColor: 'accent.main' },
         },
       }}
     >
-      <Box sx={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: 'divider' }}>
+      <Box
+        sx={{
+          position: 'relative',
+          aspectRatio: '4 / 3',
+          overflow: 'hidden',
+          bgcolor: 'divider',
+          borderBottom: 1,
+          borderColor: 'text.primary',
+        }}
+      >
         {!isImageLoaded && (
           <Skeleton variant="rectangular" sx={{ position: 'absolute', inset: 0, height: '100%' }} />
         )}
@@ -71,7 +88,13 @@ function ProjectCard({ project, onOpenDetails }) {
       </Box>
       <CardContent sx={{ flexGrow: 1 }}>
         <Stack spacing={1.5}>
-          <Typography variant="h6" component="h3">{project.title}</Typography>
+          <Typography
+            variant="h6"
+            component="h3"
+            sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700 })}
+          >
+            {project.title}
+          </Typography>
           <Typography
             color="text.secondary"
             sx={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
@@ -87,7 +110,7 @@ function ProjectCard({ project, onOpenDetails }) {
           onClick={handleLiveDemo}
           disabled={isOpening}
           startIcon={isOpening ? <CircularProgress size={16} color="inherit" /> : <OpenInNewIcon />}
-          sx={ACTION_BUTTON_SX}
+          sx={{ ...ACTION_BUTTON_SX, '&:hover': { bgcolor: 'accent.main' } }}
         >
           Live Demo
         </Button>
@@ -98,12 +121,12 @@ function ProjectCard({ project, onOpenDetails }) {
             target="_blank"
             rel="noopener noreferrer"
             startIcon={<GitHubIcon />}
-            sx={ACTION_BUTTON_SX}
+            sx={{ ...ACTION_BUTTON_SX, borderColor: 'text.primary', '&:hover': { borderColor: 'accent.main', color: 'accent.main' } }}
           >
             GitHub
           </Button>
         )}
-        <Button onClick={() => onOpenDetails(project)} sx={ACTION_BUTTON_SX}>
+        <Button onClick={() => onOpenDetails(project)} sx={{ ...ACTION_BUTTON_SX, '&:hover': { color: 'accent.main' } }}>
           View Details
         </Button>
       </CardActions>
