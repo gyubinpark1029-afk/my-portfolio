@@ -22,7 +22,9 @@ function GuestbookMood({ emoji, rating, onEmojiChange, onRatingChange }) {
                 height: 48,
                 fontSize: '1.25rem',
                 borderRadius: 0,
-                '&.Mui-selected, &.Mui-selected:hover': { bgcolor: 'accent.main' },
+                borderColor: 'text.primary',
+                '&:hover': { borderColor: 'accent.main' },
+                '&.Mui-selected, &.Mui-selected:hover': { bgcolor: 'accent.main', borderColor: 'accent.main' },
               }}
             >
               {item}

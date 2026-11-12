@@ -113,7 +113,7 @@ function GuestbookForm({ onSubmitted }) {
           slotProps={{ htmlInput: { maxLength: 20 } }}
         />
       </Box>
-      {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+      {errorMessage && <Alert severity="error" sx={{ borderRadius: 0 }}>{errorMessage}</Alert>}
       <Button
         type="submit"
         variant="contained"
@@ -130,6 +130,8 @@ function GuestbookForm({ onSubmitted }) {
         autoHideDuration={3000}
         onClose={() => setIsThanksOpen(false)}
         message="남겨 주셔서 고마워요 🧡"
+        // 알림창도 각진 모서리로 맞춘다.
+        slotProps={{ content: { sx: { borderRadius: 0 } } }}
       />
     </Stack>
   );
