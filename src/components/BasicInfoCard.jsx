@@ -37,11 +37,10 @@ function BasicInfoCard({ info }) {
           <Avatar
             src={info.photo}
             alt={`${info.name} 프로필 사진`}
-            // 사진도 각지게 하고, 검정 테두리를 둘러 박스들과 맞춘다.
+            // 사진은 동그랗게 두고, 검정 테두리를 둘러 박스들과 맞춘다.
             sx={{
               width: 160,
               height: 160,
-              borderRadius: 0,
               border: 1,
               borderColor: 'text.primary',
               bgcolor: 'secondary.main',
