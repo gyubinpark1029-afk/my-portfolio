@@ -50,11 +50,16 @@ function BasicInfoCard({ info, isStacked = false }) {
           >
             <PetsIcon sx={{ fontSize: 64 }} />
           </Avatar>
-          <Stack spacing={1} sx={{ alignItems: isStacked ? 'center' : { xs: 'center', sm: 'flex-start' } }}>
+          <Stack spacing={1} sx={{ alignItems: isStacked ? 'stretch' : { xs: 'center', sm: 'flex-start' } }}>
             <Typography
               variant="h4"
               component="h1"
-              sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, mb: 1 })}
+              sx={(theme) => ({
+                fontFamily: theme.typography.fontFamilyPoint,
+                fontWeight: 700,
+                mb: 1,
+                textAlign: isStacked ? 'center' : 'inherit',
+              })}
             >
               {info.name}
             </Typography>

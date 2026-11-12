@@ -3,7 +3,7 @@ import BasicInfoCard from './BasicInfoCard.jsx';
 import SkillIcon from './SkillIcon.jsx';
 import { usePortfolio } from '../context/PortfolioContext.js';
 
-// 홈 탭용 미리보기. 왼쪽에는 showInHome 섹션의 요약, 오른쪽에는 프로필 카드, 아래에는 주요 스킬 아이콘을 보여준다.
+// 홈 탭용 미리보기. 왼쪽에는 프로필 카드, 오른쪽에는 showInHome 섹션의 요약, 아래에는 주요 스킬 아이콘을 보여준다.
 // 데이터는 Context에서 받아서, About Me 탭에서 고친 내용이 바로 반영된다.
 function AboutPreview() {
   const { getHomeData } = usePortfolio();
@@ -11,7 +11,9 @@ function AboutPreview() {
 
   return (
     <Stack spacing={3} sx={{ mt: 3, textAlign: 'left' }}>
-      <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', md: '1fr 320px' } }}>
+      <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', md: '320px 1fr' } }}>
+        {/* About Me 탭과 같은 카드를 써서 두 화면의 프로필이 항상 같게 한다. */}
+        <BasicInfoCard info={basicInfo} isStacked />
         {/* 테두리 상자 하나에 섹션들을 모아 한 덩어리로 읽히게 한다. 요약은 3줄까지만 보인다. */}
         <Box sx={{ border: 1, borderColor: 'text.primary', borderRadius: 0, p: { xs: 3, md: 4 } }}>
           <Stack spacing={4} divider={<Divider flexItem />}>
@@ -40,8 +42,6 @@ function AboutPreview() {
             ))}
           </Stack>
         </Box>
-        {/* About Me 탭과 같은 카드를 써서 두 화면의 프로필이 항상 같게 한다. */}
-        <BasicInfoCard info={basicInfo} isStacked />
       </Box>
       <Stack direction="row" spacing={2} useFlexGap sx={{ flexWrap: 'wrap' }}>
         {skills.map((skill) => (
