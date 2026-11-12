@@ -8,7 +8,7 @@ const BUTTON_SX = { minHeight: 48, px: 3, borderRadius: 0 };
 // Hero의 다음 행동 안내: 프로젝트 보기(주요), 연락하기(보조), GitHub 바로가기
 function HeroActions() {
   return (
-    <Stack direction="row" spacing={2} useFlexGap sx={{ justifyContent: 'center', flexWrap: 'wrap', mt: 4 }}>
+    <Stack direction="row" spacing={2} useFlexGap sx={{ justifyContent: { xs: 'center', md: 'flex-start' }, flexWrap: 'wrap', mt: 4 }}>
       <Button
         variant="contained"
         onClick={() => scrollToSection('projects')}

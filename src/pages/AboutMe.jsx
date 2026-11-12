@@ -6,6 +6,7 @@ import PageContainer from '../components/PageContainer.jsx';
 import BasicInfoCard from '../components/BasicInfoCard.jsx';
 import AboutSectionAccordion from '../components/AboutSectionAccordion.jsx';
 import AboutSkills from '../components/AboutSkills.jsx';
+import Reveal from '../components/Reveal.jsx';
 import { usePortfolio } from '../context/PortfolioContext.js';
 
 function AboutMe() {
@@ -25,7 +26,9 @@ function AboutMe() {
 
   return (
     <PageContainer>
-      <BasicInfoCard info={aboutMeData.basicInfo} />
+      <Reveal>
+        <BasicInfoCard info={aboutMeData.basicInfo} />
+      </Reveal>
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center', justifyContent: 'flex-end' }}>
         {/* 안내 문구는 부드럽게 나타나고, 스크린 리더에는 상태 변화로 읽힌다. */}
         <Fade in={isEditing} mountOnEnter unmountOnExit>
@@ -43,14 +46,18 @@ function AboutMe() {
           {isEditing ? '편집 완료' : '내용 편집'}
         </Button>
       </Stack>
-      <AboutSectionAccordion
-        sections={aboutMeData.sections}
-        expandedId={expandedId}
-        onChange={handleChange}
-        isEditing={isEditing}
-        onContentChange={updateSectionContent}
-      />
-      <AboutSkills />
+      <Reveal>
+        <AboutSectionAccordion
+          sections={aboutMeData.sections}
+          expandedId={expandedId}
+          onChange={handleChange}
+          isEditing={isEditing}
+          onContentChange={updateSectionContent}
+        />
+      </Reveal>
+      <Reveal>
+        <AboutSkills />
+      </Reveal>
     </PageContainer>
   );
 }

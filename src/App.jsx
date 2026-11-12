@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import CustomCursor from './components/CustomCursor.jsx';
+import IntroSplash from './components/IntroSplash.jsx';
 import NavBar from './components/NavBar.jsx';
 import Home from './pages/Home.jsx';
 import AboutMe from './pages/AboutMe.jsx';
@@ -7,6 +9,8 @@ import Projects from './pages/Projects.jsx';
 function App() {
   return (
     <>
+      <IntroSplash />
+      <CustomCursor />
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,5 +1,8 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Card, CardActionArea, CardContent, Divider, Typography } from '@mui/material';
+import Reveal from './Reveal.jsx';
+import ScrambleText from './ScrambleText.jsx';
+import SlideUpText from './SlideUpText.jsx';
 
 // 레퍼런스 사이트처럼 흰 바탕에 위쪽 굵은 선으로 섹션을 나눈다.
 // to를 넘기면 카드 전체가 해당 페이지로 가는 링크가 된다.
@@ -8,17 +11,20 @@ function SectionCard({ id, title, description, to, number, children }) {
   // 위쪽 여백은 요청에 따라 35px로 고정한다. (8의 배수가 아닌 예외 값)
   const content = (
     <CardContent sx={{ pt: '35px', pb: { xs: 5, md: 8 }, px: { xs: 3, md: 5 } }}>
+      {/* 스크롤로 섹션에 다가오면: 번호가 떠오르고, 제목이 튀어 오르고, 설명이 타이핑된다. */}
       {number && (
-        <Typography
-          sx={(theme) => ({
-            fontFamily: theme.typography.fontFamilyPoint,
-            color: 'accent.main',
-            letterSpacing: 2,
-            mb: 1,
-          })}
-        >
-          {String(number).padStart(2, '0')}
-        </Typography>
+        <Reveal>
+          <Typography
+            sx={(theme) => ({
+              fontFamily: theme.typography.fontFamilyPoint,
+              color: 'accent.main',
+              letterSpacing: 2,
+              mb: 1,
+            })}
+          >
+            {String(number).padStart(2, '0')}
+          </Typography>
+        </Reveal>
       )}
       <Typography
         variant="h4"
@@ -31,20 +37,22 @@ function SectionCard({ id, title, description, to, number, children }) {
           mb: 3,
         })}
       >
-        {title}
+        {/* 글자 아래쪽(g, j 등)이 가려지지 않도록 가리는 상자를 살짝 키우고 그만큼 당겨 둔다. */}
+        <SlideUpText sx={{ pb: '0.12em', mb: '-0.12em' }}>{title}</SlideUpText>
       </Typography>
       <Divider sx={{ borderColor: 'currentColor', opacity: 0.3, mb: 3 }} />
       {/* 레퍼런스처럼 제목 아래 설명은 가는 포인트 폰트에 회색으로 둔다. */}
       <Typography
+        component="div"
         sx={(theme) => ({
           fontFamily: theme.typography.fontFamilyPoint,
           fontWeight: 300,
           color: 'text.secondary',
         })}
       >
-        {description}
+        <ScrambleText text={description} />
       </Typography>
-      {children}
+      {children && <Reveal>{children}</Reveal>}
     </CardContent>
   );
 

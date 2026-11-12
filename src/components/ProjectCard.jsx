@@ -36,6 +36,8 @@ function ProjectCard({ project, onOpenDetails }) {
 
   return (
     <Card
+      // 마우스를 올리면 커서가 "VIEW"가 적힌 큰 원으로 바뀐다.
+      data-cursor="VIEW"
       sx={{
         height: '100%',
         display: 'flex',

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Alert, Box, CircularProgress, Typography } from '@mui/material';
 import PageContainer from '../components/PageContainer.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
+import Reveal from '../components/Reveal.jsx';
 import ProjectDetailDialog from '../components/ProjectDetailDialog.jsx';
 import supabase from '../supabaseClient.js';
 
@@ -41,17 +42,19 @@ function Projects() {
         <Typography color="text.secondary">아직 등록된 프로젝트가 없어요.</Typography>
       )}
       {/* 모바일 1열 -> 태블릿 2열 -> 데스크톱 3열 */}
-      <Box
-        sx={{
-          display: 'grid',
-          gap: 3,
-          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-        }}
-      >
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} onOpenDetails={setSelectedProject} />
-        ))}
-      </Box>
+      <Reveal>
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 3,
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+          }}
+        >
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} onOpenDetails={setSelectedProject} />
+          ))}
+        </Box>
+      </Reveal>
       <ProjectDetailDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
     </PageContainer>
   );

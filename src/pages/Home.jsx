@@ -40,12 +40,15 @@ const SECTIONS = [
 
 function Home() {
   return (
-    <PageContainer>
+    <>
+      {/* Hero는 배경이 화면 폭 전체에 깔려야 해서 PageContainer 밖에 둔다. */}
       <HeroSection />
-      {SECTIONS.map((section, index) => (
-        <SectionCard key={section.title} number={index + 1} {...section} />
-      ))}
-    </PageContainer>
+      <PageContainer>
+        {SECTIONS.map((section, index) => (
+          <SectionCard key={section.title} number={index + 1} {...section} />
+        ))}
+      </PageContainer>
+    </>
   );
 }
 
