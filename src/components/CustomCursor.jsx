@@ -4,6 +4,8 @@ import { gsap, isReducedMotion, isTouchDevice } from '../lib/motion.js';
 
 // 링크·버튼 위에서는 커지고, data-cursor="VIEW"처럼 글을 단 요소 위에서는 글이 적힌 큰 원이 된다.
 const INTERACTIVE_SELECTOR = 'a, button, [role="button"], input, textarea, select, [tabindex="0"]';
+// 카드 안의 작은 버튼은 카드 글보다 우선해서 "링크" 모양으로 보여준다.
+const CONTROL_SELECTOR = 'button, [role="button"], .MuiButton-root, .MuiIconButton-root, input, textarea, select';
 const SIZES = { dot: 16, link: 48, label: 80 };
 
 // 마우스를 부드럽게 따라다니는 커서 (레퍼런스의 _cursor).
@@ -29,11 +31,13 @@ function CustomCursor() {
     const handleOver = (event) => {
       const target = event.target instanceof Element ? event.target : null;
       const labelText = target?.closest('[data-cursor]')?.dataset.cursor;
-      if (target?.closest(INTERACTIVE_SELECTOR)) {
+      if (target?.closest(CONTROL_SELECTOR)) {
         setMode('link');
       } else if (labelText) {
         setMode('label');
         setLabel(labelText);
+      } else if (target?.closest(INTERACTIVE_SELECTOR)) {
+        setMode('link');
       } else {
         setMode('dot');
       }

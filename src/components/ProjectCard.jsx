@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Box, Button, Card, CardActions, CardContent, CircularProgress, Skeleton, Stack, Typography,
+  Box, Button, Card, CardActions, CardContent, CircularProgress, Link, Skeleton, Stack, Typography,
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -17,12 +17,16 @@ const ACTION_BUTTON_SX = {
   px: 1,
   fontSize: '0.875rem',
   whiteSpace: 'nowrap',
+  // 카드 전체가 링크일 때도 버튼은 따로 눌리도록 한다.
+  pointerEvents: 'auto',
   // 레퍼런스처럼 각진 버튼. 검정 버튼에 마우스를 올리면 파란 포인트색으로 바뀐다.
   borderRadius: 0,
   '& .MuiButton-startIcon': { mr: 0.5, ml: 0 },
 };
 
-function ProjectCard({ project, onOpenDetails }) {
+// onOpenDetails를 주면 "View Details" 버튼이 생기고, 주지 않으면 버튼이 없다.
+// isCardLink가 true이면 카드 어디를 눌러도 프로젝트 사이트가 새 탭으로 열린다. (홈 화면용)
+function ProjectCard({ project, onOpenDetails, isCardLink = false }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isOpening, setIsOpening] = useState(false);
   const githubUrl = getGithubUrl(project.detail_url);
@@ -36,9 +40,11 @@ function ProjectCard({ project, onOpenDetails }) {
 
   return (
     <Card
-      // 마우스를 올리면 커서가 "VIEW"가 적힌 큰 원으로 바뀐다.
-      data-cursor="VIEW"
+      // 마우스를 올리면 커서가 글이 적힌 큰 원으로 바뀐다.
+      data-cursor={isCardLink ? 'VISIT' : 'VIEW'}
       sx={{
+        // 키보드로 카드 링크에 이동했을 때 카드 전체에 윤곽선이 보이게 한다.
+        '&:has(.stretched-link:focus-visible)': { outline: '2px solid', outlineColor: 'accent.main', outlineOffset: 2 },
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -95,7 +101,23 @@ function ProjectCard({ project, onOpenDetails }) {
             component="h3"
             sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 500 })}
           >
-            {project.title}
+            {isCardLink ? (
+              // 제목을 링크로 만들고, ::after로 카드 전체를 덮어서 어디를 눌러도 이동하게 한다. (버튼은 위에 따로 올라온다)
+              <Link
+                className="stretched-link"
+                href={project.detail_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} 사이트 열기 (새 탭)`}
+                underline="none"
+                color="inherit"
+                sx={{ '&::after': { content: '""', position: 'absolute', inset: 0 }, '&:hover': { color: 'inherit' }, '&:focus-visible': { outline: 'none' } }}
+              >
+                {project.title}
+              </Link>
+            ) : (
+              project.title
+            )}
           </Typography>
           <Typography
             color="text.secondary"
@@ -106,7 +128,11 @@ function ProjectCard({ project, onOpenDetails }) {
           <TechStack items={project.tech_stack} />
         </Stack>
       </CardContent>
-      <CardActions disableSpacing sx={{ px: 2, pb: 2, gap: 1 }}>
+      <CardActions
+        disableSpacing
+        // 링크 모드에서는 버튼 사이의 빈 곳을 눌러도 카드 링크가 눌리도록 통과시킨다.
+        sx={{ position: 'relative', px: 2, pb: 2, gap: 1, pointerEvents: isCardLink ? 'none' : 'auto' }}
+      >
         <Button
           variant="contained"
           onClick={handleLiveDemo}
@@ -128,9 +154,11 @@ function ProjectCard({ project, onOpenDetails }) {
             GitHub
           </Button>
         )}
-        <Button onClick={() => onOpenDetails(project)} sx={{ ...ACTION_BUTTON_SX, '&:hover': { color: 'accent.main' } }}>
-          View Details
-        </Button>
+        {onOpenDetails && (
+          <Button onClick={() => onOpenDetails(project)} sx={{ ...ACTION_BUTTON_SX, '&:hover': { color: 'accent.main' } }}>
+            View Details
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
