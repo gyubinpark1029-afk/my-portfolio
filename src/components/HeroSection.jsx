@@ -1,42 +1,26 @@
-import { Box, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { keyframes } from '@mui/material/styles';
 import HeroActions from './HeroActions.jsx';
+import HeroScrollCue from './HeroScrollCue.jsx';
+import HeroWords from './HeroWords.jsx';
 import TechStack from './TechStack.jsx';
+import { usePortfolio } from '../context/PortfolioContext.js';
 
-// 흩어져 있던 단어(아이디어)가 가운데로 모이며 사라지는 움직임
-const gather = keyframes`
-  0% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1); }
-  25% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { opacity: 0; transform: translate(0, 0) scale(0.4); }
-`;
-
-// 단어들이 모인 뒤에 헤드라인이 나타난다.
+// 단어들이 모이는 동안 헤드라인이 나타난다.
 const reveal = keyframes`
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 `;
 
-// x, y는 가운데에서 떨어진 시작 위치(px). 화면이 좁으면 --s로 줄인다.
-const WORDS = [
-  { text: 'Design', x: -320, y: -120 },
-  { text: 'Code', x: 320, y: -140 },
-  { text: 'Idea', x: -260, y: 140 },
-  { text: 'Story', x: 280, y: 130 },
-  { text: 'Figma', x: -120, y: -200 },
-  { text: 'CSS', x: 140, y: 200 },
-  { text: 'Run', x: -380, y: 10 },
-  { text: 'Book', x: 380, y: 0 },
-];
-
-// 첫 화면에서 핵심 메시지가 빨리 보이도록 연출을 짧게 한다. (이전에는 제목이 약 2초 뒤에 나타났다)
-const GATHER_SECONDS = 1.2;
-const WORD_STAGGER_SECONDS = 0.05;
 const REVEAL_DELAY_SECONDS = 0.5;
+const REVEAL_SECONDS = 0.7;
 // 첫 화면에서 바로 보여줄 대표 기술
 const HERO_STACK = ['React', 'MUI', 'Supabase', 'CSS3'];
 
 function HeroSection() {
+  const { aboutMeData } = usePortfolio();
+  const { name, photo } = aboutMeData.basicInfo;
+
   return (
     <Box
       component="section"
@@ -44,8 +28,12 @@ function HeroSection() {
         position: 'relative',
         overflow: 'hidden',
         bgcolor: 'background.paper',
-        borderRadius: 1,
+        // 다른 박스들처럼 각진 모서리로 맞춘다.
+        borderRadius: 0,
         minHeight: { xs: 480, md: 680 },
+        // 아래쪽 화살표가 버튼과 겹치지 않도록 여백을 둔다.
+        pt: 2,
+        pb: 8,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -54,34 +42,29 @@ function HeroSection() {
         '--s': { xs: 0.5, md: 1 },
       }}
     >
-      {WORDS.map((word, index) => (
-        <Typography
-          key={word.text}
-          aria-hidden="true"
-          sx={(theme) => ({
-            position: 'absolute',
-            fontFamily: theme.typography.fontFamilyPoint,
-            fontSize: { xs: '1rem', md: '1.5rem' },
-            color: 'text.disabled',
-            opacity: 0,
-            '--x': `calc(${word.x}px * var(--s))`,
-            '--y': `calc(${word.y}px * var(--s))`,
-            animation: `${gather} ${GATHER_SECONDS}s ${index * WORD_STAGGER_SECONDS}s ease-in-out forwards`,
-            // 움직임을 줄이도록 설정한 사람에게는 단어 애니메이션을 보여주지 않는다.
-            '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
-          })}
-        >
-          {word.text}
-        </Typography>
-      ))}
+      <HeroWords />
 
       <Box
         sx={{
           opacity: 0,
-          animation: `${reveal} 0.7s ${REVEAL_DELAY_SECONDS}s ease-out forwards`,
+          animation: `${reveal} ${REVEAL_SECONDS}s ${REVEAL_DELAY_SECONDS}s ease-out forwards`,
           '@media (prefers-reduced-motion: reduce)': { animation: 'none', opacity: 1 },
         }}
       >
+        {/* About Me와 같은 고양이 캐릭터. 처음 보는 사람에게 사람 냄새가 나도록 이름 위에 둔다. */}
+        <Avatar
+          src={photo}
+          alt={`${name} 프로필 사진`}
+          sx={{
+            width: 80,
+            height: 80,
+            mx: 'auto',
+            mb: 2,
+            border: 1,
+            borderColor: 'text.primary',
+            bgcolor: 'secondary.main',
+          }}
+        />
         {/* 이름과 직무를 가장 먼저 읽히도록 검정 글씨로 또렷하게 둔다. */}
         <Typography
           sx={(theme) => ({
@@ -91,7 +74,7 @@ function HeroSection() {
             fontSize: { xs: '1.125rem', md: '1.5rem' },
           })}
         >
-          박규빈 · Frontend Developer
+          {name} · Frontend Developer
         </Typography>
         <Typography
           variant="h1"
@@ -118,6 +101,8 @@ function HeroSection() {
         <TechStack items={HERO_STACK} isCentered />
         <HeroActions />
       </Box>
+
+      <HeroScrollCue delaySeconds={REVEAL_DELAY_SECONDS + REVEAL_SECONDS} />
     </Box>
   );
 }
