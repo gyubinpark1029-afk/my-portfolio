@@ -2,10 +2,10 @@ import { Box, IconButton, Link, Stack, Typography } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { GITHUB_URL } from '../data/profileLinks.js';
+import { CONTACT_EMAIL, GITHUB_URL } from '../data/profileLinks.js';
 
 const CONTACT_ITEMS = [
-  { key: 'email', label: '이메일', value: 'gyubinpark1029@gmail.com', href: 'mailto:gyubinpark1029@gmail.com', Icon: EmailIcon },
+  { key: 'email', label: '이메일', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, Icon: EmailIcon },
   { key: 'phone', label: '전화번호', value: '010-2586-4944', href: 'tel:01025864944', Icon: PhoneIcon },
 ];
 

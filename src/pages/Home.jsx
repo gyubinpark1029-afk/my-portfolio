@@ -8,6 +8,7 @@ import HeroSection from '../components/HeroSection.jsx';
 import SkillsPreview from '../components/SkillsPreview.jsx';
 const SECTIONS = [
   {
+    id: 'about',
     title: 'About Me',
     description: '안녕하세요, 박규빈입니다.',
     to: '/about',
