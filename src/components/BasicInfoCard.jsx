@@ -15,7 +15,8 @@ function InfoRow({ label, value }) {
 
 function BasicInfoCard({ info }) {
   return (
-    <Card>
+    // 테마에 연회색이 따로 없어서, 테마의 글자색(검정)을 흰색에 8%만 섞어 연한 회색을 만든다.
+    <Card sx={{ bgcolor: 'color-mix(in srgb, var(--mui-palette-text-primary) 8%, white)' }}>
       <CardContent sx={{ p: { xs: 3, md: 5 } }}>
         {/* 좁은 화면에서는 사진이 위, 정보가 아래로 쌓인다. */}
         <Stack
