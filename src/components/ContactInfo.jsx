@@ -2,13 +2,14 @@ import { Box, IconButton, Link, Stack, Typography } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { GITHUB_URL } from '../data/profileLinks.js';
 
 const CONTACT_ITEMS = [
   { key: 'email', label: '이메일', value: 'gyubinpark1029@gmail.com', href: 'mailto:gyubinpark1029@gmail.com', Icon: EmailIcon },
   { key: 'phone', label: '전화번호', value: '010-2586-4944', href: 'tel:01025864944', Icon: PhoneIcon },
 ];
 
-const SNS_LINKS = [{ label: 'GitHub', href: 'https://github.com/gyubinpark1029-afk', Icon: GitHubIcon }];
+const SNS_LINKS = [{ label: 'GitHub', href: GITHUB_URL, Icon: GitHubIcon }];
 
 // 레퍼런스 사이트처럼 흰 바탕, 각진 모서리, 검정 테두리로 박스를 만든다.
 const BOX_SX = {

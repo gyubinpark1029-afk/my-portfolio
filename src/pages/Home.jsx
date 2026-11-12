@@ -19,11 +19,13 @@ const SECTIONS = [
     children: <SkillsPreview />,
   },
   {
+    id: 'projects',
     title: 'Projects',
     description: '직접 만들고 배포한 프로젝트들이에요.',
     children: <ProjectsPreview />,
   },
   {
+    id: 'contact',
     title: 'Contact',
     description: '여기는 Contact 섹션입니다. 연락처, SNS, 간단한 메시지 폼이 들어갈 예정입니다.',
     // 메시지 폼 자리에 방명록을 둔다.

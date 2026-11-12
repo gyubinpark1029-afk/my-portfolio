@@ -28,9 +28,10 @@ function TechChip({ name }) {
   return <Chip size="small" variant="outlined" icon={icon} label={name} sx={{ borderRadius: 0, borderColor: 'text.primary', '& img': { ml: 1 } }} />;
 }
 
-function TechStack({ items }) {
+// isCentered가 true이면 칩들을 가운데로 모은다. (Hero처럼 가운데 정렬된 곳용)
+function TechStack({ items, isCentered = false }) {
   return (
-    <Stack direction="row" useFlexGap sx={{ flexWrap: 'wrap', gap: 1 }}>
+    <Stack direction="row" useFlexGap sx={{ flexWrap: 'wrap', gap: 1, justifyContent: isCentered ? 'center' : 'flex-start' }}>
       {items.map((name) => (
         <TechChip key={name} name={name} />
       ))}

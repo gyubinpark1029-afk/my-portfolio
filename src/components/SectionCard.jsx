@@ -4,7 +4,7 @@ import { Box, Card, CardActionArea, CardContent, Divider, Typography } from '@mu
 // 레퍼런스 사이트처럼 흰 바탕에 위쪽 굵은 선으로 섹션을 나눈다.
 // to를 넘기면 카드 전체가 해당 페이지로 가는 링크가 된다.
 // number를 넘기면 제목 위에 01, 02처럼 번호를 붙인다. (레퍼런스 사이트의 번호 체계)
-function SectionCard({ title, description, to, number, children }) {
+function SectionCard({ id, title, description, to, number, children }) {
   // 위쪽 여백은 요청에 따라 35px로 고정한다. (8의 배수가 아닌 예외 값)
   const content = (
     <CardContent sx={{ pt: '35px', pb: { xs: 5, md: 8 }, px: { xs: 3, md: 5 } }}>
@@ -50,8 +50,11 @@ function SectionCard({ title, description, to, number, children }) {
 
   return (
     <Card
+      id={id}
       sx={{
         textAlign: 'left',
+        // 위에 붙어 있는 메뉴바에 제목이 가려지지 않도록 이동 위치를 아래로 띄운다.
+        scrollMarginTop: 80,
         // 확대된 카드가 섹션 밖으로 나와도 잘리지 않게 한다.
         overflow: 'visible',
         boxShadow: 'none',
