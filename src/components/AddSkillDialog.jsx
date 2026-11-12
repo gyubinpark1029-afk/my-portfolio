@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import {
-  Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Slider, Stack, TextField, Typography,
+  Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Stack, TextField,
 } from '@mui/material';
 import { SKILL_CATEGORIES } from '../data/skillData.js';
 
+// level은 화면에 보이지 않지만, 홈 탭의 정렬 기능이 쓰므로 기본값을 넣어 둔다.
 const EMPTY_FORM = { name: '', category: SKILL_CATEGORIES[0], level: 50, description: '' };
 
-// 스킬 이름, 카테고리, 숙련도를 받아 onAdd로 넘긴다. 저장은 부모가 맡는다.
+// 스킬 이름, 카테고리, 설명을 받아 onAdd로 넘긴다. 저장은 부모가 맡는다.
 function AddSkillDialog({ isOpen, onClose, onAdd }) {
   const [form, setForm] = useState(EMPTY_FORM);
 
@@ -56,15 +57,6 @@ function AddSkillDialog({ isOpen, onClose, onAdd }) {
               <MenuItem key={category} value={category}>{category}</MenuItem>
             ))}
           </TextField>
-          <div>
-            <Typography variant="body2" color="text.secondary">숙련도 {form.level}%</Typography>
-            <Slider
-              value={form.level}
-              onChange={(_, value) => setForm((prev) => ({ ...prev, level: value }))}
-              step={5}
-              aria-label="숙련도"
-            />
-          </div>
           <TextField
             label="설명 (선택)"
             value={form.description}
