@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Stack, Tooltip, Typography } from '@mui/material';
 import SkillIcon from './SkillIcon.jsx';
 
@@ -21,8 +22,10 @@ function SkillItemCard({ skill }) {
           borderColor: 'text.primary',
           bgcolor: 'background.paper',
           transition: 'border-color 0.2s',
-          '&:hover, &:focus-visible': { borderColor: 'accent.main' },
+          '&:hover': { borderColor: 'accent.main' },
+          // 키보드로 이동할 때 어디에 있는지 보이도록 파란 윤곽선을 그린다.
           outline: 'none',
+          '&:focus-visible': { borderColor: 'accent.main', outline: '2px solid', outlineColor: 'accent.main', outlineOffset: 2 },
         }}
       >
         <SkillIcon skill={skill} />
@@ -34,4 +37,4 @@ function SkillItemCard({ skill }) {
   );
 }
 
-export default SkillItemCard;
+export default memo(SkillItemCard);

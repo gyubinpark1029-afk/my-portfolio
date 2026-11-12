@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Button, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SkillCategoryList from './SkillCategoryList.jsx';
@@ -10,6 +10,8 @@ function AboutSkills() {
   const { aboutMeData, addSkill } = usePortfolio();
   const skills = aboutMeData.skills;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const handleOpenDialog = useCallback(() => setIsDialogOpen(true), []);
+  const handleCloseDialog = useCallback(() => setIsDialogOpen(false), []);
 
   return (
     <Stack spacing={4} sx={{ mt: 3, textAlign: 'left' }}>
@@ -24,14 +26,14 @@ function AboutSkills() {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => setIsDialogOpen(true)}
+          onClick={handleOpenDialog}
           sx={{ minHeight: 48, borderRadius: 0, '&:hover': { bgcolor: 'accent.main' } }}
         >
           스킬 추가
         </Button>
       </Stack>
       <SkillCategoryList skills={skills} />
-      <AddSkillDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} onAdd={addSkill} />
+      <AddSkillDialog isOpen={isDialogOpen} onClose={handleCloseDialog} onAdd={addSkill} />
     </Stack>
   );
 }

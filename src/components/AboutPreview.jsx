@@ -39,7 +39,7 @@ function AboutPreview() {
                     overflow: 'hidden',
                   }}
                 >
-                  {item.summary}
+                  {item.summary || '아직 작성한 내용이 없어요.'}
                 </Typography>
               </div>
             ))}
@@ -54,7 +54,12 @@ function AboutPreview() {
               .filter((skill) => skill.category === category)
               .map((skill) => (
                 <Tooltip key={skill.id} title={skill.name} arrow slotProps={{ tooltip: { sx: { borderRadius: 0 } } }}>
-                  <Box tabIndex={0} aria-label={skill.name} sx={{ outline: 'none', '&:focus-visible': { outline: 2 } }}>
+                  <Box
+                    tabIndex={0}
+                    role="img"
+                    aria-label={`${skill.name} (${category})`}
+                    sx={{ outline: 'none', '&:focus-visible': { outline: '2px solid', outlineColor: 'accent.main', outlineOffset: 2 } }}
+                  >
                     <SkillIcon skill={skill} size={56} />
                   </Box>
                 </Tooltip>

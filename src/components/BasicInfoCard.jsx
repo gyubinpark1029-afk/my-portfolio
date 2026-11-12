@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Avatar, Card, CardContent, Stack, Typography } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
 
@@ -38,6 +39,7 @@ function BasicInfoCard({ info, isStacked = false }) {
           <Avatar
             src={info.photo}
             alt={`${info.name} 프로필 사진`}
+            slotProps={{ img: { loading: 'lazy' } }}
             // 사진은 동그랗게 두고, 검정 테두리를 둘러 박스들과 맞춘다.
             sx={{
               width: 160,
@@ -73,4 +75,4 @@ function BasicInfoCard({ info, isStacked = false }) {
   );
 }
 
-export default BasicInfoCard;
+export default memo(BasicInfoCard);

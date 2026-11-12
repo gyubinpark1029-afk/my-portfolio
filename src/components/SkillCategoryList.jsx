@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import SkillItemCard from './SkillItemCard.jsx';
 import { DEFAULT_CATEGORY_COLOR, SKILL_CATEGORIES, SKILL_CATEGORY_COLORS } from '../data/skillData.js';
@@ -13,7 +14,7 @@ function SkillCategoryList({ skills }) {
       {categories.map((category) => {
         const color = SKILL_CATEGORY_COLORS[category] ?? DEFAULT_CATEGORY_COLOR;
         return (
-          <div key={category}>
+          <section key={category} aria-label={`${category} 스킬`}>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
               <Box sx={{ width: 16, height: 16, border: 1, borderColor: 'text.primary', bgcolor: `${color}.main` }} />
               <Typography sx={(theme) => ({ fontFamily: theme.typography.fontFamilyPoint, fontWeight: 700, letterSpacing: 2 })}>
@@ -27,11 +28,11 @@ function SkillCategoryList({ skills }) {
                   <SkillItemCard key={skill.id} skill={skill} />
                 ))}
             </Box>
-          </div>
+          </section>
         );
       })}
     </Stack>
   );
 }
 
-export default SkillCategoryList;
+export default memo(SkillCategoryList);

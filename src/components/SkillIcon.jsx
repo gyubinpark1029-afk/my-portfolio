@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Box } from '@mui/material';
 import HtmlIcon from '@mui/icons-material/Html';
 import CssIcon from '@mui/icons-material/Css';
@@ -44,4 +45,4 @@ function SkillIcon({ skill, size = 48 }) {
   );
 }
 
-export default SkillIcon;
+export default memo(SkillIcon);

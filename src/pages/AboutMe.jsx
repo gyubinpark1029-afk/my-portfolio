@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import { useCallback, useState } from 'react';
+import { Button, Fade, Stack, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 import PageContainer from '../components/PageContainer.jsx';
@@ -15,25 +15,27 @@ function AboutMe() {
   const [expandedId, setExpandedId] = useState(aboutMeData.sections[0].id);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleChange = (id) => {
+  const handleChange = useCallback((id) => {
     setExpandedId((prevId) => (prevId === id ? null : id));
-  };
+  }, []);
 
-  const handleToggleEdit = () => {
+  const handleToggleEdit = useCallback(() => {
     setIsEditing((prev) => !prev);
-  };
+  }, []);
 
   return (
     <PageContainer>
       <BasicInfoCard info={aboutMeData.basicInfo} />
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center', justifyContent: 'flex-end' }}>
-        {isEditing && (
-          <Typography variant="body2" color="text.secondary">
+        {/* 안내 문구는 부드럽게 나타나고, 스크린 리더에는 상태 변화로 읽힌다. */}
+        <Fade in={isEditing} mountOnEnter unmountOnExit>
+          <Typography variant="body2" color="text.secondary" role="status">
             고친 내용은 홈 탭에 바로 반영돼요.
           </Typography>
-        )}
+        </Fade>
         <Button
           variant={isEditing ? 'contained' : 'outlined'}
+          aria-pressed={isEditing}
           startIcon={isEditing ? <CheckIcon /> : <EditIcon />}
           onClick={handleToggleEdit}
           sx={{ minHeight: 48, borderRadius: 0, borderColor: 'text.primary', '&:hover': { bgcolor: 'accent.main', color: 'accent.contrastText' } }}
