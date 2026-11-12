@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PageContainer from '../components/PageContainer.jsx';
 import BasicInfoCard from '../components/BasicInfoCard.jsx';
 import AboutSectionAccordion from '../components/AboutSectionAccordion.jsx';
+import AboutSkills from '../components/AboutSkills.jsx';
 import { aboutMeData } from '../data/aboutMeData.js';
 
 function AboutMe() {
@@ -22,6 +23,7 @@ function AboutMe() {
         expandedId={expandedId}
         onChange={handleChange}
       />
+      <AboutSkills />
     </PageContainer>
   );
 }
