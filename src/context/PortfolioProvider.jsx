@@ -3,19 +3,22 @@ import { PortfolioContext } from './PortfolioContext.js';
 import { aboutMeData as initialAboutMeData } from '../data/aboutMeData.js';
 import { skillsData } from '../data/skillData.js';
 import { makeSummary } from '../utils/makeSummary.js';
-import { loadPortfolioData, savePortfolioData } from '../utils/portfolioStorage.js';
 import { sortByLevel } from '../utils/skillUtils.js';
 
 const DEFAULT_DATA = { ...initialAboutMeData, skills: skillsData };
 
 function PortfolioProvider({ children }) {
-  // 처음 한 번만 브라우저에 저장된 내용을 불러온다.
-  const [aboutMeData, setAboutMeData] = useState(() => loadPortfolioData(DEFAULT_DATA));
+  // 고친 내용은 화면(메모리)에만 있다. 새로고침하면 항상 기본값에서 다시 시작한다.
+  const [aboutMeData, setAboutMeData] = useState(DEFAULT_DATA);
 
-  // 데이터가 바뀔 때마다 브라우저에 저장해서, 새로고침해도 고친 내용이 남게 한다.
+  // 예전에 저장 기능이 있던 시절 브라우저에 남은 저장값이 있으면 한 번 지워 둔다.
   useEffect(() => {
-    savePortfolioData(aboutMeData, DEFAULT_DATA);
-  }, [aboutMeData]);
+    try {
+      window.localStorage.removeItem('portfolio-data-v1');
+    } catch {
+      // 저장소를 못 써도 문제없다.
+    }
+  }, []);
 
   // 섹션 내용을 고친다. 홈 탭은 같은 데이터에서 만들어지므로 바로 반영된다.
   const updateSectionContent = useCallback((id, content) => {
